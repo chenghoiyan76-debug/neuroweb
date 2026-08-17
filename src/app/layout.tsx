@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Noto_Sans_TC, Noto_Serif_TC } from "next/font/google";
+import { ContentProvider } from "@/components/ContentProvider";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { site } from "@/lib/taxonomy";
+import { readSiteContent } from "@/lib/repository";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 const notoSans = Noto_Sans_TC({
@@ -17,33 +20,29 @@ const notoSerif = Noto_Serif_TC({
   weight: ["500", "600", "700"],
 });
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: {
     default: `${site.name} · ${site.nameZh}`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
-  keywords: [
-    "精神醫學",
-    "臨床心理學",
-    "認知行為治療",
-    "神經藥理學",
-    "DSM-5-TR",
-    "ICD-11",
-    "實證醫學",
-  ],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const content = await readSiteContent();
   return (
     <html
       lang="zh-Hant"
       className={`${notoSans.variable} ${notoSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <ContentProvider initial={content}>
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </ContentProvider>
       </body>
     </html>
   );

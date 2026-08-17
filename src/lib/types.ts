@@ -1,23 +1,3 @@
-export type Pillar =
-  | "models"
-  | "psychiatry"
-  | "therapy"
-  | "reviews"
-  | "cases";
-
-export type ReviewStatus =
-  | "peer-reviewed"
-  | "published"
-  | "under-review"
-  | "editorial";
-
-export type EvidenceLevel =
-  | "systematic-review"
-  | "rct"
-  | "observational"
-  | "expert-consensus"
-  | "theoretical";
-
 export type ContentBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string; id?: string }
@@ -33,51 +13,53 @@ export type ContentBlock =
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "quote"; text: string; cite?: string };
 
-export type Article = {
-  slug: string;
-  pillar: Pillar;
-  title: string;
-  englishTitle: string;
-  summary: string;
-  tags: string[];
-  status: ReviewStatus;
-  evidence: EvidenceLevel;
-  updatedAt: string;
-  readingMinutes: number;
-  authors: string[];
-  reviewers: string[];
-  blocks: ContentBlock[];
-};
-
-export type GlossaryCategory =
-  | "cognition"
-  | "psychiatry"
+export type Axis =
+  | "dsm"
+  | "symptom"
   | "pharmacology"
-  | "therapy"
-  | "neuroscience"
-  | "methods";
+  | "intervention"
+  | "fundamental";
 
-export type GlossaryEntry = {
-  slug: string;
-  termZh: string;
-  termEn: string;
-  abbr?: string;
-  category: GlossaryCategory;
-  definition: string;
-  related?: string[];
+export type PharmaSection = "psychosis" | "pain" | "neurodegeneration";
+
+export type RelatedMap = {
+  dsm?: string[];
+  symptoms?: string[];
+  pharmacology?: string[];
+  interventions?: string[];
+  fundamentals?: string[];
 };
 
-export type Tag = {
+export type Note = {
   slug: string;
-  zh: string;
+  axis: Axis;
+  section?: string;
   en: string;
+  zh: string;
+  summary: string;
+  related: RelatedMap;
+  blocks: ContentBlock[];
+  updatedAt: string;
 };
 
-export type PillarMeta = {
-  slug: Pillar;
-  zh: string;
+export type DsmCategory = {
+  slug: string;
   en: string;
-  kicker: string;
-  description: string;
-  href: string;
+  zh: string;
+  summary: string;
+};
+
+export type PharmaGroup = {
+  slug: PharmaSection;
+  en: string;
+  zh: string;
+  summary: string;
+};
+
+export type SiteContent = {
+  version: number;
+  updatedAt: string;
+  dsmCategories: DsmCategory[];
+  pharmaGroups: PharmaGroup[];
+  notes: Note[];
 };

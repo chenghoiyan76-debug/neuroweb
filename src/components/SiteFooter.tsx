@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site } from "@/lib/taxonomy";
+import { site } from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -10,24 +10,23 @@ export function SiteFooter() {
           <p className="mt-2 text-sm text-paper-2/80">{site.nameZh}</p>
           <p className="mt-3 text-sm leading-relaxed text-paper-2/70">{site.tagline}</p>
         </div>
-        <div className="text-sm">
-          <p className="mb-2 font-medium">專業導覽</p>
-          <div className="grid gap-1 text-paper-2/80">
-            <Link href="/models">心理學與認知模型</Link>
-            <Link href="/psychiatry">精神醫學與神經藥理學</Link>
-            <Link href="/therapy">治療取向</Link>
-            <Link href="/glossary">中英術語詞彙表</Link>
-          </div>
-        </div>
-        <div className="text-sm leading-relaxed text-paper-2/75">
-          <p className="mb-2 font-medium">使用聲明</p>
-          <p>
-            內容供心理健康專業人員教育與討論，不能取代個別臨床判斷、完整評估或所屬機構指引。診斷分類請以
-            DSM-5-TR、ICD-11 官方文本為準。
-          </p>
+        <div className="text-sm leading-relaxed text-paper-2/80">
+          <p className="mb-2 font-medium">Audience</p>
+          <p>精神科醫師、臨床心理師及精神醫療從業人員。Terminology 保留英文，主要內容為繁體中文。</p>
           <p className="mt-3">
             <Link href="/about" className="underline underline-offset-4">
-              關於本站與平台選擇
+              關於本站
+            </Link>
+          </p>
+        </div>
+        <div className="text-sm leading-relaxed text-paper-2/75">
+          <p className="mb-2 font-medium">Disclaimer</p>
+          <p>
+            教育用途，不能取代個別臨床判斷或官方 DSM-5 / DSM-5-TR 文本。不重製受著作權保護的診斷準則原文。
+          </p>
+          <p className="mt-6 text-[10px] tracking-[0.35em] text-paper-2/30">
+            <Link href="/lab" className="hover:text-paper-2/60">
+              LAB
             </Link>
           </p>
         </div>
