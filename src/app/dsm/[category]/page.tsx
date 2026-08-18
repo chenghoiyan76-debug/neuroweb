@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
 import { NoteCard } from "@/components/NoteView";
+import { applyTerms, bilingualTitle, ui } from "@/lib/i18n";
+import { getLocale } from "@/lib/locale";
+import { notePageTitle } from "@/lib/meta";
 import { illnessesForCategory } from "@/lib/query";
 import { readSiteContent } from "@/lib/repository";
 
@@ -16,12 +19,13 @@ export async function generateMetadata({
   const { category } = await params;
   const content = await readSiteContent();
   const meta = content.dsmCategories.find((item) => item.slug === category);
-  return { title: meta ? `${meta.en}` : "DSM-5" };
+  return notePageTitle(meta, "DSM-5 分類", "DSM-5 Classification");
 }
 
 export default async function Page({ params }: { params: Promise<{ category: string }> }) {
   const { category } = await params;
-  const content = await readSiteContent();
+  const [content, locale] = await Promise.all([readSiteContent(), getLocale()]);
+  const t = ui[locale];
   const meta = content.dsmCategories.find((item) => item.slug === category);
   if (!meta) notFound();
   const illnesses = illnessesForCategory(content, category);
@@ -31,20 +35,23 @@ export default async function Page({ params }: { params: Promise<{ category: str
       <section className="border-b border-rule bg-paper-2">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <p className="text-sm tracking-wide text-copper">DSM-5 Classification</p>
-          <h1 className="mt-2 font-serif text-3xl md:text-4xl">{meta.en}</h1>
-          <p className="mt-2 text-lg text-ink-soft">{meta.zh}</p>
-          <p className="mt-4 max-w-3xl leading-relaxed text-ink-soft">{meta.summary}</p>
+          <h1 className="mt-2 font-serif text-3xl md:text-4xl">
+            {bilingualTitle(meta.zh, meta.en, locale)}
+          </h1>
+          <p className="mt-4 max-w-3xl leading-relaxed text-ink-soft">
+            {applyTerms(locale === "en" ? meta.summaryEn : meta.summary, locale)}
+          </p>
         </div>
       </section>
       <section className="mx-auto max-w-6xl px-4 py-10">
-        <h2 className="font-serif text-2xl">Illness Studies · 臨床筆記</h2>
+        <h2 className="font-serif text-2xl">{t.illnessStudies}</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           {illnesses.map((note) => (
             <NoteCard key={note.slug} note={note} />
           ))}
         </div>
         {illnesses.length === 0 ? (
-          <p className="mt-6 text-sm text-ink-soft">此大類尚無筆記，可經 Lab 後台新增。</p>
+          <p className="mt-6 text-sm text-ink-soft">{t.emptyCategory}</p>
         ) : null}
       </section>
     </div>

@@ -47,6 +47,7 @@ export type DsmCategory = {
   en: string;
   zh: string;
   summary: string;
+  summaryEn: string;
 };
 
 export type PharmaGroup = {
@@ -54,6 +55,7 @@ export type PharmaGroup = {
   en: string;
   zh: string;
   summary: string;
+  summaryEn: string;
 };
 
 export type SiteContent = {

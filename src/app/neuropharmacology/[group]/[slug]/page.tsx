@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { NoteView } from "@/components/NoteView";
+import { notePageTitle } from "@/lib/meta";
 import { notesByAxis } from "@/lib/query";
 import { readSiteContent } from "@/lib/repository";
 
@@ -19,7 +20,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const content = await readSiteContent();
   const note = content.notes.find((item) => item.slug === slug);
-  return { title: note ? `${note.en}（${note.zh}）` : "Mechanism" };
+  return notePageTitle(note, "作用機轉", "Mechanism");
 }
 
 export default async function Page({

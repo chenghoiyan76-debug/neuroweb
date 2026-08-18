@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { NoteView } from "@/components/NoteView";
+import { notePageTitle } from "@/lib/meta";
 import { readSiteContent } from "@/lib/repository";
 
 export async function generateStaticParams() {
@@ -17,7 +18,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const content = await readSiteContent();
   const note = content.notes.find((item) => item.slug === slug);
-  return { title: note ? `${note.en}（${note.zh}）` : "Illness Study" };
+  return notePageTitle(note, "臨床筆記", "Illness study");
 }
 
 export default async function Page({

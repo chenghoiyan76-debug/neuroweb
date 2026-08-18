@@ -1,3 +1,4 @@
+import { noteEn } from "@/lib/copy";
 import type { Note, SiteContent } from "@/lib/types";
 
 export function notesByAxis(content: SiteContent, axis: Note["axis"], section?: string) {
@@ -27,10 +28,12 @@ export function searchNotes(content: SiteContent, query: string) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   return content.notes.filter((note) => {
+    const pack = noteEn[note.slug];
     const hay = [
       note.en,
       note.zh,
       note.summary,
+      pack?.summary ?? "",
       note.slug,
       note.section ?? "",
       ...note.blocks.flatMap((block) => {

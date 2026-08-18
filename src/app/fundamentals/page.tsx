@@ -1,9 +1,12 @@
 import { AxisHero } from "@/components/AxisHero";
 import { NoteCard } from "@/components/NoteView";
+import { pageTitle } from "@/lib/meta";
 import { notesByAxis } from "@/lib/query";
 import { readSiteContent } from "@/lib/repository";
 
-export const metadata = { title: "核心神經科學基礎" };
+export async function generateMetadata() {
+  return pageTitle("核心神經科學基礎", "Core Neuroscience Fundamentals");
+}
 
 export default async function Page() {
   const content = await readSiteContent();

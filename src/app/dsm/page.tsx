@@ -1,23 +1,26 @@
 import { NoteCard } from "@/components/NoteView";
+import { applyTerms, bilingualTitle, ui } from "@/lib/i18n";
+import { getLocale } from "@/lib/locale";
+import { pageTitle } from "@/lib/meta";
 import { illnessesForCategory } from "@/lib/query";
 import { readSiteContent } from "@/lib/repository";
 
-export const metadata = {
-  title: "DSM-5 分類",
-  description: "DSM-5 Classification：以大類進入 Illness Studies。",
-};
+export async function generateMetadata() {
+  return pageTitle("DSM-5 分類", "DSM-5 Classification");
+}
 
 export default async function Page() {
-  const content = await readSiteContent();
+  const [content, locale] = await Promise.all([readSiteContent(), getLocale()]);
+  const t = ui[locale];
   return (
     <div>
       <section className="border-b border-rule bg-paper-2">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <p className="text-sm tracking-wide text-copper">DSM-5 Classification</p>
-          <h1 className="mt-2 font-serif text-4xl">DSM-5 分類</h1>
-          <p className="mt-4 max-w-3xl leading-relaxed text-ink-soft">
-            將游標移至頂部導覽的「DSM-5 分類」可展開浮動下拉選單（Hover Dropdown），顯示 Mood Disorders、Schizophrenia Spectrum 等常見精神疾病大類。點擊大類後進入 Illness Studies。本站不重製 DSM-5 診斷準則原文。
-          </p>
+          <h1 className="mt-2 font-serif text-4xl">
+            {bilingualTitle("DSM-5 分類", "DSM-5 Classification", locale)}
+          </h1>
+          <p className="mt-4 max-w-3xl leading-relaxed text-ink-soft">{t.dsmIntro}</p>
         </div>
       </section>
       <section className="mx-auto max-w-6xl px-4 py-10">
@@ -31,15 +34,21 @@ export default async function Page() {
                 className="rounded-2xl border border-rule bg-paper-2 p-6 hover:border-teal"
               >
                 <p className="text-sm font-medium text-teal">{category.en}</p>
-                <h2 className="mt-1 font-serif text-2xl">{category.zh}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{category.summary}</p>
-                <p className="mt-4 text-xs text-copper">{count} 則 Illness Studies</p>
+                <h2 className="mt-1 font-serif text-2xl">
+                  {bilingualTitle(category.zh, category.en, locale)}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                  {applyTerms(locale === "en" ? category.summaryEn : category.summary, locale)}
+                </p>
+                <p className="mt-4 text-xs text-copper">
+                  {count} {t.illnessCount}
+                </p>
               </a>
             );
           })}
         </div>
         <div className="mt-12">
-          <h2 className="font-serif text-2xl">最近更新的臨床筆記</h2>
+          <h2 className="font-serif text-2xl">{t.recentNotes}</h2>
           <div className="mt-5 grid gap-5 md:grid-cols-2">
             {content.notes
               .filter((note) => note.axis === "dsm")

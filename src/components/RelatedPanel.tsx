@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import type { Note, RelatedMap } from "@/lib/types";
+import { useLocale } from "@/components/LocaleProvider";
+import { bilingualTitle, ui } from "@/lib/i18n";
 import { noteHrefBySlug } from "@/lib/paths";
+import type { Note, RelatedMap } from "@/lib/types";
 
 const labels: Record<keyof RelatedMap, { en: string; zh: string }> = {
   dsm: { en: "DSM-5 Classification", zh: "DSM-5 分類" },
@@ -17,6 +21,8 @@ export function RelatedPanel({
   related: RelatedMap;
   notes: Note[];
 }) {
+  const locale = useLocale();
+  const t = ui[locale];
   const groups = (Object.keys(labels) as (keyof RelatedMap)[]).filter(
     (key) => (related[key] ?? []).length > 0,
   );
@@ -24,17 +30,14 @@ export function RelatedPanel({
 
   return (
     <aside className="rounded-2xl border border-rule bg-paper-2 p-5">
-      <p className="text-xs tracking-wide text-copper">Related axes</p>
-      <h2 className="mt-1 font-serif text-xl">跨軸連結</h2>
-      <p className="mt-2 text-xs leading-relaxed text-ink-soft">
-        精神醫學症狀 · 神經藥理學 · 治療神經科學與介入 · 核心神經科學基礎
-      </p>
+      <p className="text-xs tracking-wide text-copper">{t.relatedAxes}</p>
+      <h2 className="mt-1 font-serif text-xl">{t.related}</h2>
+      <p className="mt-2 text-xs leading-relaxed text-ink-soft">{t.relatedHint}</p>
       <div className="mt-4 grid gap-4">
         {groups.map((key) => (
           <div key={key}>
             <p className="text-sm font-medium">
-              {labels[key].zh}{" "}
-              <span className="text-xs font-normal text-copper">{labels[key].en}</span>
+              {bilingualTitle(labels[key].zh, labels[key].en, locale)}
             </p>
             <ul className="mt-1 grid gap-1 text-sm">
               {(related[key] ?? []).map((slug) => {
@@ -45,7 +48,7 @@ export function RelatedPanel({
                       href={note ? noteHrefBySlug(note) : "#"}
                       className="text-teal hover:underline"
                     >
-                      {note ? `${note.en}（${note.zh}）` : slug}
+                      {note ? bilingualTitle(note.zh, note.en, locale) : slug}
                     </Link>
                   </li>
                 );

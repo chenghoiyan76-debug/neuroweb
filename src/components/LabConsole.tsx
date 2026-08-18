@@ -11,7 +11,7 @@ const emptyNote = (): Note => ({
   zh: "新筆記",
   summary: "",
   related: {},
-  blocks: [{ type: "p", text: "在此撰寫臨床筆記。Terminology 請保留英文。" }],
+  blocks: [{ type: "p", text: "在此撰寫臨床筆記。術語請寫成 {{中文|English}}，繁中版會顯示為 中文 (English)。" }],
   updatedAt: new Date().toISOString().slice(0, 10),
 });
 
