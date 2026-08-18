@@ -7,7 +7,7 @@ import { useLocale } from "@/components/LocaleProvider";
 import { bilingualTitle, ui } from "@/lib/i18n";
 import { localizeBlocks } from "@/lib/localize";
 import { applyTerms } from "@/lib/i18n";
-import { domainBySlug, relatedNotes, resourcesForNote } from "@/lib/query";
+import { domainBySlug, parentChain, relatedNotes, resourcesForNote } from "@/lib/query";
 import { levelById, reflection } from "@/lib/site";
 import type { Note } from "@/lib/types";
 
@@ -22,9 +22,24 @@ export function NoteView({ note }: { note: Note }) {
   const resources = resourcesForNote(content, note.slug);
   const blocks = localizeBlocks(note.blocks, locale);
   const summary = applyTerms(locale === "en" ? note.summaryEn || note.summary : note.summary, locale);
+  const parents = domain ? parentChain(content, domain) : [];
+  const lensLabel =
+    note.lens === "cognitive"
+      ? t.lensCognitive
+      : note.lens === "behavior"
+        ? t.lensBehavior
+        : note.lens === "assessment"
+          ? t.lensAssessment
+          : note.lens === "treatment"
+            ? t.lensTreatment
+            : note.lens === "case"
+              ? t.lensCase
+              : null;
   const kicker = isReflection
     ? t.reflection
-    : `${level ? `Level ${level.id}` : t.inbox} · ${domain ? bilingualTitle(domain.zh, domain.en, locale) : note.domain}`;
+    : lensLabel
+      ? lensLabel
+      : `${level ? `Level ${level.id}` : t.inbox} · ${domain ? bilingualTitle(domain.zh, domain.en, locale) : note.domain}`;
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-10">
@@ -34,7 +49,35 @@ export function NoteView({ note }: { note: Note }) {
             {kicker}
           </Link>
         ) : (
-          kicker
+          <span className="flex flex-wrap items-center gap-x-2 gap-y-1 normal-case tracking-wide">
+            {level ? (
+              <Link href={`/level/${level.id}`} className="hover:text-ink">
+                Level {level.id}
+              </Link>
+            ) : null}
+            {parents.map((parent) => (
+              <span key={parent.slug} className="contents">
+                <span aria-hidden>/</span>
+                <Link href={`/domain/${parent.slug}`} className="hover:text-ink">
+                  {locale === "en" ? parent.en : parent.zh}
+                </Link>
+              </span>
+            ))}
+            {domain ? (
+              <span className="contents">
+                <span aria-hidden>/</span>
+                <Link href={`/domain/${domain.slug}`} className="hover:text-ink">
+                  {locale === "en" ? domain.en : domain.zh}
+                </Link>
+              </span>
+            ) : null}
+            {lensLabel ? (
+              <span className="contents">
+                <span aria-hidden>/</span>
+                <span>{kicker}</span>
+              </span>
+            ) : null}
+          </span>
         )}
       </p>
       <h1 className="mt-2 font-serif text-4xl leading-tight">{bilingualTitle(note.zh, note.en, locale)}</h1>

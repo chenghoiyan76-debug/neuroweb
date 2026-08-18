@@ -26,7 +26,30 @@ export function reflectionNotes(content: SiteContent): Note[] {
 }
 
 export function childDomains(content: SiteContent, slug: string): Domain[] {
-  return content.domains.filter((domain) => domain.parent === slug);
+  return content.domains
+    .filter((domain) => domain.parent === slug)
+    .sort((a, b) => (a.order ?? 999) - (b.order ?? 999) || a.zh.localeCompare(b.zh, "zh-Hant"));
+}
+
+export function parentChain(content: SiteContent, domain: Domain): Domain[] {
+  const chain: Domain[] = [];
+  let current: Domain | undefined = domain;
+  const seen = new Set<string>();
+  while (current?.parent && !seen.has(current.parent)) {
+    seen.add(current.parent);
+    const parent = domainBySlug(content, current.parent);
+    if (!parent) break;
+    chain.unshift(parent);
+    current = parent;
+  }
+  return chain;
+}
+
+export function lensNotesFor(content: SiteContent, slug: string): Note[] {
+  const order = ["cognitive", "behavior", "assessment", "treatment", "case"] as const;
+  return order
+    .map((lens) => content.notes.find((item) => item.domain === slug && item.lens === lens))
+    .filter((item): item is Note => Boolean(item));
 }
 
 export function domainsAtLevel(content: SiteContent, level: number): Domain[] {

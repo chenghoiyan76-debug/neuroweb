@@ -209,6 +209,9 @@ function LevelItem({
                           href={`/domain/${child.slug}`}
                           className="rounded-md px-2 py-1 text-[12px] text-ink-soft hover:bg-paper hover:text-ink"
                         >
+                          {child.kind === "dsm-chapter" && child.order
+                            ? `${String(child.order).padStart(2, "0")} · `
+                            : null}
                           {locale === "en" ? child.en : child.zh}
                         </Link>
                       ))}

@@ -400,7 +400,7 @@ export const indexNotes: Note[] = [
     en: "Psychiatry & DSM-5 Disorders",
     summary: "臨床檢索索引：表徵與機制，不重製準則原文。",
     tags: ["DSM-5", "nosology"],
-    related: ["mood-disorders", "historical-sick-mind"],
+    related: ["neurodevelopmental", "depressive-disorders", "historical-sick-mind"],
     blocks: [
       {
         type: "callout",
@@ -412,12 +412,16 @@ export const indexNotes: Note[] = [
         type: "p",
         text: `分類讓對話成為可能，也讓歷史偏見被凍結成類別。使用 DSM-5 時，同時打開「病態心智的歷史脈絡」，避免把當代類別當成自然種類。`,
       },
+      {
+        type: "p",
+        text: "十九個類群各自展開疾患；每個疾患固定五個子頁：認知模式、行為、衡鑑、藥物簡介與心理介入、案例分享（合成教學敘事）。",
+      },
     ],
   }),
   note({
     slug: "mood-disorders",
     level: 4,
-    domain: "mood-disorders",
+    domain: "depressive-disorders",
     zh: "情感疾患",
     en: "Mood Disorders",
     summary: "重鬱與雙相的光譜與發作週期檢索。",
@@ -433,7 +437,7 @@ export const indexNotes: Note[] = [
   note({
     slug: "anxiety-stressor",
     level: 4,
-    domain: "anxiety-stressor",
+    domain: "anxiety-disorders",
     zh: "焦慮與壓力相關疾患",
     en: "Anxiety & Stressor-Related Disorders",
     summary: "恐慌、GAD 與 PTSD 的分類索引。",

@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      { source: "/dsm", destination: "/level/4", permanent: false },
+      { source: "/dsm", destination: "/domain/psychiatry-dsm5", permanent: false },
       { source: "/dsm/:path*", destination: "/domain/psychiatry-dsm5", permanent: false },
       { source: "/symptoms", destination: "/level/3", permanent: false },
       { source: "/symptoms/:path*", destination: "/level/3", permanent: false },
@@ -24,6 +24,8 @@ const nextConfig: NextConfig = {
       { source: "/glossary", destination: "/search", permanent: false },
       { source: "/garden", destination: "/admin", permanent: false },
       { source: "/lab", destination: "/admin", permanent: false },
+      { source: "/domain/mood-disorders", destination: "/domain/depressive-disorders", permanent: false },
+      { source: "/domain/anxiety-stressor", destination: "/domain/anxiety-disorders", permanent: false },
       { source: "/tags/:path*", destination: "/search", permanent: false },
     ];
   },

@@ -28,6 +28,10 @@ export type Resource = {
   noteSlug?: string;
 };
 
+export type DomainKind = "reflection" | "dsm-chapter" | "dsm-illness";
+
+export type DsmLens = "cognitive" | "behavior" | "assessment" | "treatment" | "case";
+
 export type Domain = {
   slug: string;
   level: LevelId;
@@ -37,7 +41,8 @@ export type Domain = {
   summary: string;
   summaryEn: string;
   custom?: boolean;
-  kind?: "reflection";
+  kind?: DomainKind;
+  order?: number;
 };
 
 export type Note = {
@@ -54,6 +59,7 @@ export type Note = {
   blocks: ContentBlock[];
   updatedAt: string;
   custom?: boolean;
+  lens?: DsmLens;
 };
 
 export type LevelMeta = {

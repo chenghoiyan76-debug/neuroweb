@@ -1,4 +1,5 @@
 import { term } from "@/lib/i18n";
+import { dsmDomains } from "./dsm/build";
 import type { Domain, LevelId } from "@/lib/types";
 
 function d(
@@ -167,51 +168,7 @@ export const domains: Domain[] = [
     "作為臨床檢索索引，探討各類疾患的臨床表徵與病理機制。不重製診斷準則原文。",
     "A clinical retrieval index for presentations and mechanisms. Diagnostic criteria text is not reproduced.",
   ),
-  d(
-    4,
-    "mood-disorders",
-    "情感疾患",
-    "Mood Disorders",
-    `包含${term("Major Depressive Disorder", "重鬱症")}（MDD）、${term("Bipolar I & II", "雙相情緒障礙症")}的疾病光譜與發作週期檢索。`,
-    "A retrieval map for MDD and Bipolar I & II spectra and episode cycles.",
-    "psychiatry-dsm5",
-  ),
-  d(
-    4,
-    "anxiety-stressor",
-    "焦慮與壓力相關疾患",
-    "Anxiety & Stressor-Related Disorders",
-    `包含${term("Panic Disorder", "恐慌症")}、${term("Generalized Anxiety Disorder", "廣泛性焦慮症")}（GAD）、${term("Post-Traumatic Stress Disorder", "創傷後壓力症")}（PTSD）。`,
-    "Panic Disorder, GAD, and PTSD as a classification index.",
-    "psychiatry-dsm5",
-  ),
-  d(
-    4,
-    "schizophrenia-spectrum",
-    "思覺失調光譜與其他精神病症",
-    "Schizophrenia Spectrum & Psychotic Disorders",
-    `${term("Positive Symptoms", "正性症狀")}、${term("Negative Symptoms", "負性症狀")}與${term("Cognitive Decline", "認知退化")}的檢索。`,
-    "A retrieval map for positive symptoms, negative symptoms, and cognitive decline.",
-    "psychiatry-dsm5",
-  ),
-  d(
-    4,
-    "neurodevelopmental",
-    "神經發展障礙症",
-    "Neurodevelopmental Disorders",
-    `涵蓋${term("Attention-Deficit/Hyperactivity Disorder", "注意力不足過動症")}（ADHD）與${term("Autism Spectrum Disorder", "自閉症光譜")}（ASD）的成人期表現分類。`,
-    "Adult presentations of ADHD and Autism Spectrum Disorder.",
-    "psychiatry-dsm5",
-  ),
-  d(
-    4,
-    "personality-disorders",
-    "人格障礙症",
-    "Personality Disorders",
-    `包含 A、B、C 群（Cluster A, B, C）與${term("Alternative Model", "替代模型")}檢索。`,
-    "Cluster A, B, C and the Alternative Model as a retrieval index.",
-    "psychiatry-dsm5",
-  ),
+  ...dsmDomains,
   d(
     4,
     "historical-sick-mind",
@@ -220,6 +177,7 @@ export const domains: Domain[] = [
     "從收容所、道德治療、精神分析到生物精神醫學：疾病分類如何被時代塑造。",
     "From asylums and moral treatment to psychoanalysis and biological psychiatry: how eras shape nosology.",
     "psychiatry-dsm5",
+    { order: 20 },
   ),
   d(
     4,

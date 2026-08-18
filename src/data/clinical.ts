@@ -385,7 +385,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "major-depressive-disorder",
     level: 4,
-    domain: "mood-disorders",
+    domain: "major-depressive-disorder",
     zh: "重度憂鬱症",
     en: "Major Depressive Disorder",
     summary: "情緒、缺乏快感、軀體與認知群聚。重點在病程、自殺風險、鑑別雙相。",
@@ -407,7 +407,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "bipolar-i",
     level: 4,
-    domain: "mood-disorders",
+    domain: "bipolar-i",
     zh: "雙相情緒障礙症第一型",
     en: "Bipolar I Disorder",
     summary: "躁狂定義疾病；憂鬱期常是失能主因。睡眠減少是早期預警。",
@@ -430,7 +430,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "schizophrenia",
     level: 4,
-    domain: "schizophrenia-spectrum",
+    domain: "schizophrenia",
     zh: "思覺失調症",
     en: "Schizophrenia",
     summary: "正性、負性與認知三條軸要分開追蹤。",
@@ -451,7 +451,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "generalized-anxiety-disorder",
     level: 4,
-    domain: "anxiety-stressor",
+    domain: "generalized-anxiety-disorder",
     zh: "廣泛性焦慮症",
     en: "Generalized Anxiety Disorder",
     summary: "擔心被當成責任與預防災難的策略。",
@@ -467,7 +467,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "ptsd",
     level: 4,
-    domain: "anxiety-stressor",
+    domain: "ptsd",
     zh: "創傷後壓力症",
     en: "Posttraumatic Stress Disorder",
     summary: "記憶、安全感與高警覺系統被改寫。",
@@ -483,7 +483,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "adhd",
     level: 4,
-    domain: "neurodevelopmental",
+    domain: "adhd",
     zh: "注意力不足過動症",
     en: "Attention-Deficit/Hyperactivity Disorder",
     summary: "成人期常以執行崩解、時間盲與情緒波動呈現。",
@@ -499,7 +499,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "borderline-personality-disorder",
     level: 4,
-    domain: "personality-disorders",
+    domain: "borderline-personality-disorder",
     zh: "邊緣型人格疾患",
     en: "Borderline Personality Disorder",
     summary: "人際風暴、認同不穩與喚起失調；接到依附與創傷。",
@@ -515,7 +515,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "substance-use-disorder",
     level: 4,
-    domain: "psychiatry-dsm5",
+    domain: "substance-addictive",
     zh: "物質使用疾患",
     en: "Substance Use Disorder",
     summary: "獎賞、戒斷與執行控制的臨床交界。",
@@ -531,7 +531,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "major-ncd-alzheimer",
     level: 4,
-    domain: "neurodegeneration-pharm",
+    domain: "major-ncd-alzheimer",
     zh: "阿茲海默病所致之重度神經認知疾患",
     en: "Major NCD due to Alzheimer Disease",
     summary: "認知剖面、可逆因子與症狀性藥理的教育地圖。",
@@ -547,7 +547,7 @@ export const clinicalNotes: Note[] = [
   note({
     slug: "insomnia-disorder",
     level: 4,
-    domain: "mood-disorders",
+    domain: "insomnia-disorder",
     zh: "失眠疾患",
     en: "Insomnia Disorder",
     summary: "睡眠結構被打斷後，情緒與執行功能一起失真。",
