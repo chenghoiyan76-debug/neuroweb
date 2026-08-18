@@ -22,7 +22,8 @@ const nextConfig: NextConfig = {
       { source: "/reviews", destination: "/search", permanent: false },
       { source: "/cases", destination: "/level/4", permanent: false },
       { source: "/glossary", destination: "/search", permanent: false },
-      { source: "/editorial", destination: "/about", permanent: false },
+      { source: "/garden", destination: "/admin", permanent: false },
+      { source: "/lab", destination: "/admin", permanent: false },
       { source: "/tags/:path*", destination: "/search", permanent: false },
     ];
   },

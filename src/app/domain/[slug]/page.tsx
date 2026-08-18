@@ -20,7 +20,7 @@ export default function DomainPage() {
       <div className="mx-auto max-w-3xl px-4 py-16">
         <h1 className="font-serif text-3xl">{t.notFoundTitle}</h1>
         <p className="mt-3 text-ink-soft">{t.emptyDomain}</p>
-        <Link href="/lab" className="mt-4 inline-block text-teal">
+        <Link href="/admin" className="mt-4 inline-block text-teal">
           {t.addViaLab}
         </Link>
       </div>
@@ -38,8 +38,8 @@ export default function DomainPage() {
           ← Level {level.id} · {bilingualTitle(level.zh, level.en, locale)}
         </Link>
       ) : (
-        <Link href="/garden" className="text-xs tracking-wide text-ink-soft">
-          ← {t.garden}
+        <Link href="/" className="text-xs tracking-wide text-ink-soft">
+          ← {t.backHome}
         </Link>
       )}
       <h1 className="mt-3 font-serif text-4xl">{bilingualTitle(domain.zh, domain.en, locale)}</h1>

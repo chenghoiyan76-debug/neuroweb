@@ -26,16 +26,15 @@ npm run dev
 | 4 | `/level/4` | 健康與疾病的界線 |
 | 5 | `/level/5` | 超越心智與形而上學 |
 
-花園／Inbox：`/garden`（尚未歸檔的頁面與資源）
+## 管理後台
 
-## 後門 Lab
+入口：頁尾 **Admin**，或直接開 `/admin`（需密碼）。
 
-隱藏入口：頁尾極淡的 **LAB**，或直接開 `/lab`。
-
-- 開發環境預設金鑰：`NeuroPsychLab`（見 `.env.example` 的 `NPI_LAB_KEY`）
+- 開發環境預設密碼：`NeuroPsychLab`（見 `.env.example` 的 `NPI_LAB_KEY`）
 - 生產環境必須自行設定 `NPI_LAB_KEY`，未設定則拒絕登入
-- 可新增筆記、頁面／領域、資源（連結、論文、書籍）
-- 儲存後寫入 `data/site-content.json`，可用 Export/Import 做版本控管
+- 可新增／編輯／刪除筆記、頁面與資源（連結、論文、書籍）
+- 儲存後寫入 `data/site-content.json`，可用匯出／匯入做版本控管
+- 舊路徑 `/lab`、`/garden` 會轉到 `/admin`
 
 ## 原則
 

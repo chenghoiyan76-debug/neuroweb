@@ -332,12 +332,4 @@ export const domains: Domain[] = [
     `將${term("I Ching", "易經")}的變動思維、佛學的無常與正念，作為理解當代心理學（如 ACT 的接受與承諾）的底層心智模型。`,
     "I Ching change-thinking and Buddhist impermanence/mindfulness as a base model for contemporary psychology such as ACT.",
   ),
-  d(
-    0,
-    "inbox",
-    "花園／Inbox",
-    "Garden / Inbox",
-    "後門新增、尚未歸入金字塔的頁面與資源。知識先落地，再依思考邏輯長上去。",
-    "Pages and resources added through the back door before they are filed into the pyramid.",
-  ),
 ];

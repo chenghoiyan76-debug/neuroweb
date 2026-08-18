@@ -3,11 +3,11 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import type { Domain, LevelId, Note, Resource, ResourceKind, SiteContent } from "@/lib/types";
 
-type Tab = "compose" | "notes" | "pages" | "resources" | "json";
+type Tab = "overview" | "compose" | "notes" | "pages" | "resources" | "json";
 
-const emptyNote = (domain = "inbox"): Note => ({
+const emptyNote = (domain = "classical-psychodynamics"): Note => ({
   slug: `note-${Date.now()}`,
-  level: 0,
+  level: 1,
   domain,
   en: "New note",
   zh: "新筆記",
@@ -27,11 +27,11 @@ const emptyNote = (domain = "inbox"): Note => ({
 
 const emptyDomain = (): Domain => ({
   slug: `page-${Date.now()}`,
-  level: 0,
+  level: 1,
   en: "New page",
   zh: "新頁面",
-  summary: "從後門新增的自訂頁面，可稍後歸入金字塔。",
-  summaryEn: "A custom page added from the back door; file it into the pyramid later.",
+  summary: "在管理後台新增的頁面。",
+  summaryEn: "A page added from the admin portal.",
   custom: true,
 });
 
@@ -44,23 +44,22 @@ const emptyResource = (): Resource => ({
   note: "",
 });
 
-export function LabConsole() {
+export function AdminPortal() {
   const [authed, setAuthed] = useState<boolean | null>(null);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [content, setContent] = useState<SiteContent | null>(null);
-  const [tab, setTab] = useState<Tab>("compose");
+  const [tab, setTab] = useState<Tab>("overview");
   const [selected, setSelected] = useState("");
   const [draft, setDraft] = useState("");
   const [status, setStatus] = useState("");
   const [levelFilter, setLevelFilter] = useState<LevelId | "all">("all");
-
   const [form, setForm] = useState({
     kind: "note" as "note" | "page" | "resource",
     zh: "",
     en: "",
-    level: "0",
-    domain: "inbox",
+    level: "1",
+    domain: "classical-psychodynamics",
     summary: "",
     url: "",
     resourceKind: "link" as ResourceKind,
@@ -83,8 +82,9 @@ export function LabConsole() {
         const first = data.notes[0];
         setSelected(first?.slug ?? "");
         setDraft(first ? JSON.stringify(first, null, 2) : "");
-        if (data.domains[0]) {
-          setForm((current) => ({ ...current, domain: data.domains[0]?.slug ?? "inbox" }));
+        const firstDomain = data.domains.find((domain) => domain.level !== 0);
+        if (firstDomain) {
+          setForm((current) => ({ ...current, domain: firstDomain.slug }));
         }
       });
   }, [authed]);
@@ -93,6 +93,14 @@ export function LabConsole() {
     () => content?.notes.find((item) => item.slug === selected) ?? null,
     [content, selected],
   );
+
+  const draftCount = useMemo(() => {
+    if (!content) return 0;
+    const notes = content.notes.filter((item) => item.level === 0).length;
+    const pages = content.domains.filter((item) => item.level === 0).length;
+    const resources = (content.resources ?? []).filter((item) => !item.noteSlug && !item.domain).length;
+    return notes + pages + resources;
+  }, [content]);
 
   function selectNote(slug: string, source: Note | undefined = content?.notes.find((item) => item.slug === slug)) {
     setSelected(slug);
@@ -109,7 +117,7 @@ export function LabConsole() {
       body: JSON.stringify({ password }),
     });
     if (!response.ok) {
-      setError("金鑰不正確，或尚未設定 NPI_LAB_KEY。");
+      setError("密碼不正確，或尚未設定 NPI_LAB_KEY。");
       return;
     }
     setAuthed(true);
@@ -128,7 +136,7 @@ export function LabConsole() {
     }
     const saved = (await response.json()) as SiteContent;
     setContent({ ...saved, resources: saved.resources ?? [] });
-    setStatus(`已寫入 data/site-content.json · version ${saved.version}`);
+    setStatus(`已儲存 · version ${saved.version} · ${saved.updatedAt}`);
   }
 
   function applyDraft() {
@@ -159,7 +167,7 @@ export function LabConsole() {
     event.preventDefault();
     if (!content) return;
     if (form.kind === "note") {
-      const created = emptyNote(form.domain || "inbox");
+      const created = emptyNote(form.domain || "classical-psychodynamics");
       created.zh = form.zh || created.zh;
       created.en = form.en || created.en;
       created.summary = form.summary;
@@ -191,29 +199,39 @@ export function LabConsole() {
     created.kind = form.resourceKind;
     created.note = form.summary;
     if (form.attachTo) created.noteSlug = form.attachTo;
-    else if (form.domain) created.domain = form.domain;
+    else if (form.domain && Number(form.level) !== 0) created.domain = form.domain;
     const next = { ...content, resources: [created, ...(content.resources ?? [])] };
     void saveAll(next);
     setTab("resources");
   }
 
-  function addNote() {
-    if (!content) return;
-    const created = emptyNote();
-    const next = { ...content, notes: [created, ...content.notes] };
-    setContent(next);
-    selectNote(created.slug, created);
-    setStatus("已在記憶體新增筆記，請編輯後按「儲存此筆」。");
-  }
-
   function removeNote() {
     if (!content || !note) return;
-    if (!confirm(`刪除 ${note.en}？`)) return;
+    if (!confirm(`刪除「${note.zh}」？`)) return;
     const notes = content.notes.filter((item) => item.slug !== note.slug);
     const next = { ...content, notes };
     setContent(next);
     selectNote(notes[0]?.slug ?? "", notes[0]);
     void saveAll(next);
+  }
+
+  function removePage(slug: string) {
+    if (!content) return;
+    if (!confirm(`刪除頁面 ${slug}？`)) return;
+    void saveAll({
+      ...content,
+      domains: content.domains.filter((item) => item.slug !== slug),
+      notes: content.notes.filter((item) => item.domain !== slug),
+    });
+  }
+
+  function removeResource(id: string) {
+    if (!content) return;
+    if (!confirm("刪除此資源？")) return;
+    void saveAll({
+      ...content,
+      resources: (content.resources ?? []).filter((item) => item.id !== id),
+    });
   }
 
   function download() {
@@ -236,32 +254,32 @@ export function LabConsole() {
       await saveAll(parsed);
       selectNote(parsed.notes[0]?.slug ?? "", parsed.notes[0]);
     } catch {
-      setStatus("匯入失敗：不是有效的 SiteContent。");
+      setStatus("匯入失敗：不是有效的內容檔。");
     }
   }
 
   if (authed === null) {
-    return <p className="px-4 py-16 text-center text-ink-soft">檢查 Lab session…</p>;
+    return <p className="px-4 py-16 text-center text-ink-soft">檢查管理權限…</p>;
   }
 
   if (!authed) {
     return (
       <div className="mx-auto max-w-md px-4 py-16">
-        <p className="text-xs tracking-[0.3em] text-copper">BACK DOOR</p>
-        <h1 className="mt-2 font-serif text-3xl">Mind-Note Lab</h1>
+        <p className="text-xs tracking-[0.3em] text-copper">ADMIN</p>
+        <h1 className="mt-2 font-serif text-3xl">內容管理後台</h1>
         <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-          新增頁面、筆記與資源的後門。本地預設金鑰見 README 的 <code>NPI_LAB_KEY</code>。生產環境必須自行設定環境變數。
+          在這裡新增、編輯、刪除筆記、頁面與資源。本地預設密碼見 <code>NPI_LAB_KEY</code>（.env.example）。生產環境必須自行設定。
         </p>
         <form onSubmit={login} className="mt-6 grid gap-3">
           <input
             type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            placeholder="Lab key"
+            placeholder="Admin password"
             className="rounded-xl border border-rule bg-paper-2 px-4 py-3"
           />
           <button type="submit" className="rounded-xl bg-night px-4 py-3 text-sm text-paper-2">
-            進入
+            登入後台
           </button>
           {error ? <p className="text-sm text-clinical">{error}</p> : null}
         </form>
@@ -276,18 +294,15 @@ export function LabConsole() {
     <div className="mx-auto max-w-7xl px-4 py-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-xs tracking-wide text-copper">Content backdoor</p>
-          <h1 className="font-serif text-3xl">Mind-Note Lab</h1>
+          <p className="text-xs tracking-wide text-copper">Mind-Note Admin</p>
+          <h1 className="font-serif text-3xl">內容管理後台</h1>
         </div>
         <div className="flex flex-wrap gap-2 text-sm">
-          <button type="button" className="rounded-full border border-rule px-3 py-1" onClick={addNote}>
-            空白筆記
-          </button>
           <button type="button" className="rounded-full border border-rule px-3 py-1" onClick={download}>
-            Export JSON
+            匯出 JSON
           </button>
           <label className="rounded-full border border-rule px-3 py-1">
-            Import JSON
+            匯入 JSON
             <input
               type="file"
               accept="application/json"
@@ -314,11 +329,12 @@ export function LabConsole() {
       <div className="mt-5 flex flex-wrap gap-2 text-sm">
         {(
           [
-            ["compose", "新增"],
+            ["overview", "總覽"],
+            ["compose", "新增內容"],
             ["notes", "筆記"],
             ["pages", "頁面"],
-            ["resources", "資源／Inbox"],
-            ["json", "JSON"],
+            ["resources", "資源"],
+            ["json", "JSON 編輯"],
           ] as const
         ).map(([id, label]) => (
           <button
@@ -332,23 +348,37 @@ export function LabConsole() {
         ))}
       </div>
 
+      {tab === "overview" ? (
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Stat label="筆記" value={content?.notes.length ?? 0} />
+          <Stat label="頁面／領域" value={content?.domains.length ?? 0} />
+          <Stat label="資源" value={content?.resources.length ?? 0} />
+          <Stat label="草稿（未上金字塔）" value={draftCount} />
+          <p className="sm:col-span-2 lg:col-span-4 text-sm leading-relaxed text-ink-soft">
+            這是你的私人後台，不會出現在前台導覽。新增的筆記與頁面請指定 Level 1–5，就會出現在對應的金字塔層。JSON
+            會寫入 <code>data/site-content.json</code>。
+          </p>
+        </div>
+      ) : null}
+
       {tab === "compose" ? (
         <form onSubmit={compose} className="mt-6 grid max-w-2xl gap-3 rounded-2xl border border-rule bg-paper-2 p-5">
-          <p className="text-sm text-ink-soft">把新頁面、筆記或資源先放進金字塔或 Inbox。未指定層級時會進花園。</p>
+          <p className="text-sm text-ink-soft">新增筆記、頁面或外部資源，並指定要掛上的金字塔層級。</p>
           <select
             value={form.kind}
             onChange={(event) => setForm({ ...form, kind: event.target.value as typeof form.kind })}
             className="rounded-lg border border-rule bg-paper px-3 py-2"
           >
-            <option value="note">新筆記</option>
-            <option value="page">新頁面／領域</option>
-            <option value="resource">新資源（連結、論文、書籍）</option>
+            <option value="note">筆記</option>
+            <option value="page">頁面／領域</option>
+            <option value="resource">資源（連結、論文、書籍）</option>
           </select>
           <input
             value={form.zh}
             onChange={(event) => setForm({ ...form, zh: event.target.value })}
             placeholder="中文標題"
             className="rounded-lg border border-rule bg-paper px-3 py-2"
+            required
           />
           <input
             value={form.en}
@@ -362,23 +392,25 @@ export function LabConsole() {
               onChange={(event) => setForm({ ...form, level: event.target.value })}
               className="rounded-lg border border-rule bg-paper px-3 py-2"
             >
-              <option value="0">Inbox / 未歸檔</option>
-              <option value="1">Level 1 結構</option>
-              <option value="2">Level 2 測量</option>
-              <option value="3">Level 3 互動</option>
-              <option value="4">Level 4 健康／疾病</option>
+              <option value="1">Level 1 本質與結構</option>
+              <option value="2">Level 2 心智的測量</option>
+              <option value="3">Level 3 心智的互動</option>
+              <option value="4">Level 4 健康與疾病</option>
               <option value="5">Level 5 形而上學</option>
+              <option value="0">草稿（不上架）</option>
             </select>
             <select
               value={form.domain}
               onChange={(event) => setForm({ ...form, domain: event.target.value })}
               className="rounded-lg border border-rule bg-paper px-3 py-2"
             >
-              {content?.domains.map((domain) => (
-                <option key={domain.slug} value={domain.slug}>
-                  L{domain.level} · {domain.zh}
-                </option>
-              ))}
+              {content?.domains
+                .filter((domain) => domain.level !== 0)
+                .map((domain) => (
+                  <option key={domain.slug} value={domain.slug}>
+                    L{domain.level} · {domain.zh}
+                  </option>
+                ))}
             </select>
           </div>
           {form.kind === "resource" ? (
@@ -388,12 +420,12 @@ export function LabConsole() {
                 onChange={(event) => setForm({ ...form, resourceKind: event.target.value as ResourceKind })}
                 className="rounded-lg border border-rule bg-paper px-3 py-2"
               >
-                <option value="link">link</option>
-                <option value="paper">paper</option>
-                <option value="book">book</option>
-                <option value="media">media</option>
-                <option value="file">file</option>
-                <option value="note">note</option>
+                <option value="link">連結</option>
+                <option value="paper">論文</option>
+                <option value="book">書籍</option>
+                <option value="media">媒體</option>
+                <option value="file">檔案</option>
+                <option value="note">備註</option>
               </select>
               <input
                 value={form.url}
@@ -404,7 +436,7 @@ export function LabConsole() {
               <input
                 value={form.attachTo}
                 onChange={(event) => setForm({ ...form, attachTo: event.target.value })}
-                placeholder="掛到既有筆記 slug（可留空＝Inbox）"
+                placeholder="掛到既有筆記 slug（可留空）"
                 className="rounded-lg border border-rule bg-paper px-3 py-2"
               />
             </>
@@ -416,7 +448,7 @@ export function LabConsole() {
             className="min-h-24 rounded-lg border border-rule bg-paper px-3 py-2"
           />
           <button type="submit" className="rounded-full bg-night px-4 py-2 text-sm text-paper-2">
-            寫入 Mind-Note
+            儲存到 Mind-Note
           </button>
         </form>
       ) : null}
@@ -430,12 +462,12 @@ export function LabConsole() {
               className="mb-3 w-full rounded-lg border border-rule bg-paper px-2 py-2 text-sm"
             >
               <option value="all">全部層級</option>
-              <option value="0">Inbox</option>
-              <option value="1">L1</option>
-              <option value="2">L2</option>
-              <option value="3">L3</option>
-              <option value="4">L4</option>
-              <option value="5">L5</option>
+              <option value="1">L1 結構</option>
+              <option value="2">L2 測量</option>
+              <option value="3">L3 互動</option>
+              <option value="4">L4 健康／疾病</option>
+              <option value="5">L5 形而上學</option>
+              <option value="0">草稿</option>
             </select>
             <div className="grid max-h-[70vh] gap-1 overflow-auto text-sm">
               {visible.map((item) => (
@@ -481,14 +513,25 @@ export function LabConsole() {
       {tab === "pages" ? (
         <div className="mt-6 grid gap-2">
           {content?.domains.map((domain) => (
-            <div key={domain.slug} className="rounded-xl border border-rule bg-paper-2 px-4 py-3">
-              <p className="text-xs text-ink-soft">
-                L{domain.level}
-                {domain.custom ? " · custom" : ""} · {domain.slug}
-              </p>
-              <p className="font-medium">
-                {domain.zh} ({domain.en})
-              </p>
+            <div key={domain.slug} className="flex items-start justify-between gap-3 rounded-xl border border-rule bg-paper-2 px-4 py-3">
+              <div>
+                <p className="text-xs text-ink-soft">
+                  L{domain.level}
+                  {domain.custom ? " · 自訂" : ""} · {domain.slug}
+                </p>
+                <p className="font-medium">
+                  {domain.zh} ({domain.en})
+                </p>
+              </div>
+              {domain.custom ? (
+                <button
+                  type="button"
+                  className="text-xs text-clinical"
+                  onClick={() => removePage(domain.slug)}
+                >
+                  刪除
+                </button>
+              ) : null}
             </div>
           ))}
         </div>
@@ -497,21 +540,30 @@ export function LabConsole() {
       {tab === "resources" ? (
         <div className="mt-6 grid gap-2">
           {(content?.resources ?? []).map((resource) => (
-            <div key={resource.id} className="rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm">
-              <p className="text-[11px] uppercase tracking-wide text-ink-soft">
-                {resource.kind}
-                {resource.noteSlug ? ` · note:${resource.noteSlug}` : resource.domain ? ` · ${resource.domain}` : " · Inbox"}
-              </p>
-              <p>
-                {resource.url ? (
-                  <a className="text-teal underline" href={resource.url}>
-                    {resource.title}
-                  </a>
-                ) : (
-                  resource.title
-                )}
-              </p>
-              {resource.note ? <p className="mt-1 text-ink-soft">{resource.note}</p> : null}
+            <div key={resource.id} className="flex items-start justify-between gap-3 rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm">
+              <div>
+                <p className="text-[11px] uppercase tracking-wide text-ink-soft">
+                  {resource.kind}
+                  {resource.noteSlug
+                    ? ` · 筆記 ${resource.noteSlug}`
+                    : resource.domain
+                      ? ` · ${resource.domain}`
+                      : " · 未掛層"}
+                </p>
+                <p>
+                  {resource.url ? (
+                    <a className="text-teal underline" href={resource.url}>
+                      {resource.title}
+                    </a>
+                  ) : (
+                    resource.title
+                  )}
+                </p>
+                {resource.note ? <p className="mt-1 text-ink-soft">{resource.note}</p> : null}
+              </div>
+              <button type="button" className="text-xs text-clinical" onClick={() => removeResource(resource.id)}>
+                刪除
+              </button>
             </div>
           ))}
         </div>
@@ -519,3 +571,14 @@ export function LabConsole() {
     </div>
   );
 }
+
+function Stat({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="rounded-2xl border border-rule bg-paper-2 px-4 py-5">
+      <p className="text-xs tracking-wide text-ink-soft">{label}</p>
+      <p className="mt-2 font-serif text-3xl">{value}</p>
+    </div>
+  );
+}
+
+export { AdminPortal as LabConsole };

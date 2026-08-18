@@ -13,10 +13,10 @@ const notes = [...bySlug.values()];
 const resources: Resource[] = [
   {
     id: "inbox-starter",
-    title: "尚未歸檔的資源會出現在這裡",
-    titleEn: "Unfiled resources land here",
+    title: "管理後台可新增論文、書籍與連結",
+    titleEn: "Add papers, books, and links in Admin",
     kind: "note",
-    note: "從 Lab 後門新增連結、論文、書籍或媒體。之後再掛到某個領域或筆記。",
+    note: "在 /admin 新增資源後，可掛到既有筆記或領域。",
   },
   {
     id: "predictive-coding-entry",

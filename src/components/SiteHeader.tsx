@@ -24,9 +24,6 @@ export function SiteHeader() {
         </Link>
         <LevelNav className="ml-auto hidden lg:flex" />
         <div className="ml-auto flex items-center gap-2 lg:ml-2">
-          <Link href="/garden" className="hidden rounded-full px-2.5 py-1 text-[12px] text-ink-soft hover:text-ink md:inline">
-            {t.garden}
-          </Link>
           <Link href="/search" className="hidden rounded-full px-2.5 py-1 text-[12px] text-ink-soft hover:text-ink md:inline">
             {t.search}
           </Link>
@@ -59,9 +56,6 @@ export function SiteHeader() {
                   {locale === "en" ? level.nav.en : level.nav.zh}
                 </Link>
               ))}
-            <Link href="/garden" onClick={() => setOpen(false)} className="rounded-lg px-2 py-2">
-              {t.garden}
-            </Link>
             <Link href="/search" onClick={() => setOpen(false)} className="rounded-lg px-2 py-2">
               {t.search}
             </Link>

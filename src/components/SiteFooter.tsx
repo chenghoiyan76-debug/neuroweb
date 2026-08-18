@@ -20,11 +20,8 @@ export async function SiteFooter() {
           <Link href="/about" className="hover:text-ink">
             {t.about}
           </Link>
-          <Link href="/garden" className="hover:text-ink">
-            {t.garden}
-          </Link>
-          <Link href="/lab" className="text-[11px] tracking-[0.35em] text-rule hover:text-copper">
-            LAB
+          <Link href="/admin" className="text-[11px] tracking-[0.2em] text-rule hover:text-copper">
+            Admin
           </Link>
         </div>
       </div>
