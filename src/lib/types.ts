@@ -60,6 +60,7 @@ export type LevelMeta = {
   slug: string;
   en: string;
   zh: string;
+  nav: { zh: string; en: string };
   kicker: { zh: string; en: string };
   description: { zh: string; en: string };
   color: string;

@@ -26,6 +26,7 @@ export const levels: LevelMeta[] = [
     slug: "metaphysics",
     zh: "超越心智與形而上學",
     en: "Metaphysics: beyond mind",
+    nav: { zh: "形而上學", en: "Metaphysics" },
     kicker: { zh: "科學的盡頭是哲學", en: "Where science meets philosophy" },
     description: {
       zh: "跳脫純粹的生物與認知模型，從更高的維度俯瞰人類心智：榮格、靈性實踐與東方底層框架。",
@@ -38,6 +39,7 @@ export const levels: LevelMeta[] = [
     slug: "sick-vs-healthy",
     zh: "健康與疾病的界線",
     en: "Sick VS Healthy Mind",
+    nav: { zh: "健康與疾病", en: "Sick vs Healthy" },
     kicker: { zh: "失衡時的臨床表徵", en: "When interaction loses balance" },
     description: {
       zh: "當心智互動失去平衡時的臨床表徵，以及科學與醫學如何介入修復：分類、藥理與心理治療歷程。",
@@ -50,6 +52,7 @@ export const levels: LevelMeta[] = [
     slug: "interaction",
     zh: "心智的互動",
     en: "Interaction of the mind",
+    nav: { zh: "心智的互動", en: "Interaction" },
     kicker: { zh: "深入大腦黑盒子", en: "Inside the black box" },
     description: {
       zh: "神經迴路與認知功能如何即時互動：執行功能、具身認知，以及大腦網絡的動態。",
@@ -62,6 +65,7 @@ export const levels: LevelMeta[] = [
     slug: "measure",
     zh: "心智的測量",
     en: "Measure of the mind",
+    nav: { zh: "心智的測量", en: "Measure" },
     kicker: { zh: "把抽象變成可觀察", en: "From abstraction to data" },
     description: {
       zh: "將抽象的心智與行為，轉化為可被觀察、量化與分析的客觀數據：制約、人格測量與心理衡鑑。",
@@ -74,6 +78,7 @@ export const levels: LevelMeta[] = [
     slug: "structure",
     zh: "心智的本質與結構",
     en: "What is mind: structure of the mind",
+    nav: { zh: "本質與結構", en: "Structure" },
     kicker: { zh: "人之所以為人的底層邏輯", en: "The base settings of a person" },
     description: {
       zh: "探討「人之所以為人」的底層邏輯，以及造成個體差異的基礎設定：心理動力、發展、與運算意識。",
