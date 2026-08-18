@@ -37,6 +37,7 @@ export type Domain = {
   summary: string;
   summaryEn: string;
   custom?: boolean;
+  kind?: "reflection";
 };
 
 export type Note = {

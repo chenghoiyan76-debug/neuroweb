@@ -37,6 +37,10 @@ export default function DomainPage() {
         <Link href={`/level/${level.id}`} className="text-xs tracking-wide text-ink-soft hover:text-ink">
           ← Level {level.id} · {bilingualTitle(level.zh, level.en, locale)}
         </Link>
+      ) : domain.kind === "reflection" ? (
+        <Link href="/reflection" className="text-xs tracking-wide text-ink-soft">
+          ← {t.reflection}
+        </Link>
       ) : (
         <Link href="/" className="text-xs tracking-wide text-ink-soft">
           ← {t.backHome}

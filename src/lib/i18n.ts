@@ -74,6 +74,12 @@ export const ui = {
     children: "子領域",
     inThisDomain: "這個領域的筆記",
     levelLabel: "層級",
+    reflection: "自我反思",
+    reflectionLead: "把理論照回自己",
+    reflectionBody:
+      "金字塔整理知識；這一頁整理你。可寫下臨床現場的反移情、自己的依附劇本、或讀完一篇論文後仍然卡住的問題。新的反思從管理後台新增。",
+    reflectionEmpty: "還沒有反思筆記。可在管理後台指定「自我反思」來新增。",
+    openReflection: "進入自我反思",
   },
   en: {
     brandSub: "Study on psychology, neuroscience and philosophy",
@@ -127,6 +133,12 @@ export const ui = {
     children: "Child domains",
     inThisDomain: "Notes in this domain",
     levelLabel: "Level",
+    reflection: "Self Reflection",
+    reflectionLead: "Turn the map back on yourself",
+    reflectionBody:
+      "The pyramid holds knowledge; this page holds you. Write countertransference, your own attachment script, or the question that remains after a paper. Add new entries in Admin under Self Reflection.",
+    reflectionEmpty: "No reflection notes yet. Create one in Admin and assign it to Self Reflection.",
+    openReflection: "Open Self Reflection",
   },
 } as const;
 

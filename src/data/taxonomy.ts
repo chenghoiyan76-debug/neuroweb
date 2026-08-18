@@ -9,8 +9,9 @@ function d(
   summary: string,
   summaryEn: string,
   parent?: string,
+  extra?: Partial<Domain>,
 ): Domain {
-  return { slug, level, zh, en, summary, summaryEn, parent };
+  return { slug, level, zh, en, summary, summaryEn, parent, ...extra };
 }
 
 export const domains: Domain[] = [
@@ -331,5 +332,15 @@ export const domains: Domain[] = [
     "Eastern Philosophy",
     `將${term("I Ching", "易經")}的變動思維、佛學的無常與正念，作為理解當代心理學（如 ACT 的接受與承諾）的底層心智模型。`,
     "I Ching change-thinking and Buddhist impermanence/mindfulness as a base model for contemporary psychology such as ACT.",
+  ),
+  d(
+    0,
+    "self-reflection",
+    "自我反思",
+    "Self Reflection",
+    "把理論照回自己：反移情、依附劇本、以及讀完之後仍然卡住的問題。",
+    "Turn theory back on yourself: countertransference, attachment scripts, and questions that remain after reading.",
+    undefined,
+    { kind: "reflection" },
   ),
 ];

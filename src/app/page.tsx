@@ -6,7 +6,7 @@ import { useContent } from "@/components/ContentProvider";
 import { useLocale } from "@/components/LocaleProvider";
 import { bilingualTitle, ui } from "@/lib/i18n";
 import { applyTerms } from "@/lib/i18n";
-import { levels, site } from "@/lib/site";
+import { levels, reflection, site } from "@/lib/site";
 
 export default function HomePage() {
   const locale = useLocale();
@@ -58,6 +58,17 @@ export default function HomePage() {
                 </Link>
               );
             })}
+          <Link href={reflection.href} className="rounded-2xl border border-rule bg-paper-2 p-5 hover:border-gold">
+            <span className="inline-block h-2 w-8 rounded-full" style={{ background: reflection.color }} />
+            <p className="mt-3 text-xs tracking-wide text-ink-soft">{t.reflectionLead}</p>
+            <h3 className="mt-1 font-serif text-xl">{bilingualTitle(reflection.zh, reflection.en, locale)}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+              {locale === "en" ? reflection.description.en : reflection.description.zh}
+            </p>
+            <p className="mt-3 text-xs text-ink-soft">
+              {content.notes.filter((note) => note.domain === reflection.slug).length} {t.notes}
+            </p>
+          </Link>
         </div>
       </section>
 

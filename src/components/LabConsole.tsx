@@ -53,7 +53,7 @@ export function AdminPortal() {
   const [selected, setSelected] = useState("");
   const [draft, setDraft] = useState("");
   const [status, setStatus] = useState("");
-  const [levelFilter, setLevelFilter] = useState<LevelId | "all">("all");
+  const [levelFilter, setLevelFilter] = useState<LevelId | "all" | "reflection">("all");
   const [form, setForm] = useState({
     kind: "note" as "note" | "page" | "resource",
     zh: "",
@@ -96,8 +96,8 @@ export function AdminPortal() {
 
   const draftCount = useMemo(() => {
     if (!content) return 0;
-    const notes = content.notes.filter((item) => item.level === 0).length;
-    const pages = content.domains.filter((item) => item.level === 0).length;
+    const notes = content.notes.filter((item) => item.level === 0 && item.domain !== "self-reflection").length;
+    const pages = content.domains.filter((item) => item.level === 0 && item.kind !== "reflection").length;
     const resources = (content.resources ?? []).filter((item) => !item.noteSlug && !item.domain).length;
     return notes + pages + resources;
   }, [content]);
@@ -171,7 +171,9 @@ export function AdminPortal() {
       created.zh = form.zh || created.zh;
       created.en = form.en || created.en;
       created.summary = form.summary;
-      created.level = Number(form.level) as LevelId;
+      const asReflection = form.level === "reflection" || form.domain === "self-reflection";
+      created.level = asReflection ? 0 : (Number(form.level) as LevelId);
+      created.domain = asReflection ? "self-reflection" : created.domain;
       created.slug = slugify(form.en || form.zh);
       const next = { ...content, notes: [created, ...content.notes] };
       setContent(next);
@@ -185,7 +187,8 @@ export function AdminPortal() {
       created.en = form.en || created.en;
       created.summary = form.summary || created.summary;
       created.summaryEn = form.summary || created.summaryEn;
-      created.level = Number(form.level) as LevelId;
+      const pageLevel = Number(form.level);
+      created.level = Number.isFinite(pageLevel) ? (pageLevel as LevelId) : 1;
       created.slug = slugify(form.en || form.zh);
       const next = { ...content, domains: [created, ...content.domains] };
       void saveAll(next);
@@ -288,7 +291,12 @@ export function AdminPortal() {
   }
 
   const visible =
-    content?.notes.filter((item) => (levelFilter === "all" ? true : item.level === levelFilter)) ?? [];
+    content?.notes.filter((item) => {
+      if (levelFilter === "all") return true;
+      if (levelFilter === "reflection") return item.domain === "self-reflection";
+      if (levelFilter === 0) return item.level === 0 && item.domain !== "self-reflection";
+      return item.level === levelFilter;
+    }) ?? [];
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
@@ -355,7 +363,7 @@ export function AdminPortal() {
           <Stat label="資源" value={content?.resources.length ?? 0} />
           <Stat label="草稿（未上金字塔）" value={draftCount} />
           <p className="sm:col-span-2 lg:col-span-4 text-sm leading-relaxed text-ink-soft">
-            這是你的私人後台，不會出現在前台導覽。新增的筆記與頁面請指定 Level 1–5，就會出現在對應的金字塔層。JSON
+            這是你的私人後台，不會出現在前台導覽。新增的筆記與頁面請指定 Level 1–5，就會出現在對應的金字塔層；指定「自我反思」則掛到頂部導覽的獨立頁。JSON
             會寫入 <code>data/site-content.json</code>。
           </p>
         </div>
@@ -366,7 +374,14 @@ export function AdminPortal() {
           <p className="text-sm text-ink-soft">新增筆記、頁面或外部資源，並指定要掛上的金字塔層級。</p>
           <select
             value={form.kind}
-            onChange={(event) => setForm({ ...form, kind: event.target.value as typeof form.kind })}
+            onChange={(event) => {
+              const kind = event.target.value as typeof form.kind;
+              setForm({
+                ...form,
+                kind,
+                level: kind !== "note" && form.level === "reflection" ? "1" : form.level,
+              });
+            }}
             className="rounded-lg border border-rule bg-paper px-3 py-2"
           >
             <option value="note">筆記</option>
@@ -397,6 +412,7 @@ export function AdminPortal() {
               <option value="3">Level 3 心智的互動</option>
               <option value="4">Level 4 健康與疾病</option>
               <option value="5">Level 5 形而上學</option>
+              {form.kind === "note" ? <option value="reflection">自我反思</option> : null}
               <option value="0">草稿（不上架）</option>
             </select>
             <select
@@ -405,10 +421,10 @@ export function AdminPortal() {
               className="rounded-lg border border-rule bg-paper px-3 py-2"
             >
               {content?.domains
-                .filter((domain) => domain.level !== 0)
+                .filter((domain) => domain.level !== 0 || domain.kind === "reflection")
                 .map((domain) => (
                   <option key={domain.slug} value={domain.slug}>
-                    L{domain.level} · {domain.zh}
+                    {domain.kind === "reflection" ? "反思" : `L${domain.level}`} · {domain.zh}
                   </option>
                 ))}
             </select>
@@ -457,8 +473,12 @@ export function AdminPortal() {
         <div className="mt-6 grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)]">
           <aside className="rounded-2xl border border-rule bg-paper-2 p-3">
             <select
-              value={levelFilter}
-              onChange={(event) => setLevelFilter(event.target.value === "all" ? "all" : (Number(event.target.value) as LevelId))}
+              value={String(levelFilter)}
+              onChange={(event) => {
+                const value = event.target.value;
+                if (value === "all" || value === "reflection") setLevelFilter(value);
+                else setLevelFilter(Number(value) as LevelId);
+              }}
               className="mb-3 w-full rounded-lg border border-rule bg-paper px-2 py-2 text-sm"
             >
               <option value="all">全部層級</option>
@@ -467,6 +487,7 @@ export function AdminPortal() {
               <option value="3">L3 互動</option>
               <option value="4">L4 健康／疾病</option>
               <option value="5">L5 形而上學</option>
+              <option value="reflection">自我反思</option>
               <option value="0">草稿</option>
             </select>
             <div className="grid max-h-[70vh] gap-1 overflow-auto text-sm">
@@ -480,7 +501,7 @@ export function AdminPortal() {
                   }`}
                 >
                   <span className="block text-[11px] opacity-80">
-                    L{item.level} · {item.en}
+                    {item.domain === "self-reflection" ? "反思" : `L${item.level}`} · {item.en}
                   </span>
                   {item.zh}
                 </button>

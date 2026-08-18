@@ -17,6 +17,14 @@ export function notesInDomain(content: SiteContent, slug: string): Note[] {
   return content.notes.filter((note) => note.domain === slug);
 }
 
+export function isReflectionDomain(domain: { slug: string; kind?: string }) {
+  return domain.slug === "self-reflection" || domain.kind === "reflection";
+}
+
+export function reflectionNotes(content: SiteContent): Note[] {
+  return content.notes.filter((note) => note.domain === "self-reflection");
+}
+
 export function childDomains(content: SiteContent, slug: string): Domain[] {
   return content.domains.filter((domain) => domain.parent === slug);
 }
@@ -56,7 +64,9 @@ export function unfiledResources(content: SiteContent): Resource[] {
 }
 
 export function customDomains(content: SiteContent): Domain[] {
-  return content.domains.filter((domain) => domain.custom || domain.level === 0);
+  return content.domains.filter(
+    (domain) => (domain.custom || domain.level === 0) && domain.kind !== "reflection",
+  );
 }
 
 export function searchBrain(content: SiteContent, query: string) {

@@ -1,10 +1,11 @@
 import { clinicalNotes } from "./clinical";
 import { indexNotes } from "./indexNotes";
+import { reflectionNotesSeed } from "./reflection";
 import { domains } from "./taxonomy";
 import type { Note, Resource, SiteContent } from "@/lib/types";
 
 const bySlug = new Map<string, Note>();
-for (const item of [...indexNotes, ...clinicalNotes]) {
+for (const item of [...indexNotes, ...clinicalNotes, ...reflectionNotesSeed]) {
   bySlug.set(item.slug, item);
 }
 

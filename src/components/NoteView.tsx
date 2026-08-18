@@ -8,7 +8,7 @@ import { bilingualTitle, ui } from "@/lib/i18n";
 import { localizeBlocks } from "@/lib/localize";
 import { applyTerms } from "@/lib/i18n";
 import { domainBySlug, relatedNotes, resourcesForNote } from "@/lib/query";
-import { levelById } from "@/lib/site";
+import { levelById, reflection } from "@/lib/site";
 import type { Note } from "@/lib/types";
 
 export function NoteView({ note }: { note: Note }) {
@@ -16,16 +16,26 @@ export function NoteView({ note }: { note: Note }) {
   const content = useContent();
   const t = ui[locale];
   const domain = domainBySlug(content, note.domain);
+  const isReflection = note.domain === reflection.slug || domain?.kind === "reflection";
   const level = levelById(note.level);
   const related = relatedNotes(content, note);
   const resources = resourcesForNote(content, note.slug);
   const blocks = localizeBlocks(note.blocks, locale);
   const summary = applyTerms(locale === "en" ? note.summaryEn || note.summary : note.summary, locale);
+  const kicker = isReflection
+    ? t.reflection
+    : `${level ? `Level ${level.id}` : t.inbox} · ${domain ? bilingualTitle(domain.zh, domain.en, locale) : note.domain}`;
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-10">
       <p className="text-[11px] tracking-[0.25em] text-copper uppercase">
-        {level ? `Level ${level.id}` : t.inbox} · {domain ? bilingualTitle(domain.zh, domain.en, locale) : note.domain}
+        {isReflection ? (
+          <Link href={reflection.href} className="hover:text-ink">
+            {kicker}
+          </Link>
+        ) : (
+          kicker
+        )}
       </p>
       <h1 className="mt-2 font-serif text-4xl leading-tight">{bilingualTitle(note.zh, note.en, locale)}</h1>
       <p className="mt-4 text-lg leading-relaxed text-ink-soft">{summary}</p>

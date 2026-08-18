@@ -3,6 +3,25 @@ import type { LevelMeta } from "@/lib/types";
 
 export { term };
 
+export const REFLECTION_DOMAIN = "self-reflection";
+
+export const reflection = {
+  href: "/reflection",
+  slug: REFLECTION_DOMAIN,
+  zh: "自我反思",
+  en: "Self Reflection",
+  nav: { zh: "自我反思", en: "Self Reflection" },
+  color: "#9a6840",
+  kicker: {
+    zh: "把理論照回自己",
+    en: "Turn the map back on yourself",
+  },
+  description: {
+    zh: "金字塔是地圖；這一頁是鏡子。把讀過的心理動力、神經科學與哲學，寫回自己的身體、關係與選擇。",
+    en: "The pyramid is a map; this page is a mirror. Write psychodynamics, neuroscience, and philosophy back onto your own body, relationships, and choices.",
+  },
+};
+
 export const site = {
   name: "Mind-Note",
   nameZh: "Mind-Note",
