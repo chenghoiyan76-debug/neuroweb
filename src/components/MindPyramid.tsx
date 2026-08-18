@@ -6,15 +6,18 @@ import { levels } from "@/lib/site";
 import { useLocale } from "./LocaleProvider";
 
 const geometry = [
-  { id: 5, top: 8, height: 86, topW: 168, botW: 300 },
-  { id: 4, top: 102, height: 86, topW: 300, botW: 452 },
-  { id: 3, top: 196, height: 86, topW: 452, botW: 620 },
-  { id: 2, top: 290, height: 86, topW: 620, botW: 792 },
+  { id: 5, top: 6, height: 108, topW: 0, botW: 300 },
+  { id: 4, top: 114, height: 82, topW: 300, botW: 452 },
+  { id: 3, top: 204, height: 82, topW: 452, botW: 620 },
+  { id: 2, top: 294, height: 82, topW: 620, botW: 792 },
   { id: 1, top: 384, height: 92, topW: 792, botW: 960 },
 ] as const;
 
-function trapezoid(cx: number, top: number, height: number, topW: number, botW: number) {
+function bandPoints(cx: number, top: number, height: number, topW: number, botW: number) {
   const y2 = top + height;
+  if (topW === 0) {
+    return `${cx},${top} ${cx + botW / 2},${y2} ${cx - botW / 2},${y2}`;
+  }
   return `${cx - topW / 2},${top} ${cx + topW / 2},${top} ${cx + botW / 2},${y2} ${cx - botW / 2},${y2}`;
 }
 
@@ -30,8 +33,11 @@ export function MindPyramid() {
         <title>Map of Our Mind</title>
         {geometry.map((band) => {
           const meta = levels.find((level) => level.id === band.id)!;
-          const label = locale === "en" ? `L${band.id} · ${meta.en}` : `L${band.id} · ${meta.zh}`;
+          const title = locale === "en" ? meta.en : meta.zh;
+          const short =
+            band.id === 5 ? (locale === "en" ? "Metaphysics" : "形而上學") : title;
           const lit = hover === band.id;
+          const textY = band.topW === 0 ? band.top + band.height * 0.62 : band.top + band.height / 2 + 5;
           return (
             <a key={band.id} href={`/level/${band.id}`}>
               <g
@@ -40,22 +46,39 @@ export function MindPyramid() {
                 className="cursor-pointer"
               >
                 <polygon
-                  points={trapezoid(cx, band.top, band.height, band.topW, band.botW)}
+                  points={bandPoints(cx, band.top, band.height, band.topW, band.botW)}
                   fill={meta.color}
                   opacity={hover === null || lit ? 0.96 : 0.55}
                   stroke={lit ? "#fbf7ef" : "rgba(251,247,239,0.35)"}
                   strokeWidth={lit ? 3 : 1}
                 />
-                <text
-                  x={cx}
-                  y={band.top + band.height / 2 + 5}
-                  textAnchor="middle"
-                  fill="#fbf7ef"
-                  fontSize={band.id === 5 ? 15 : 16}
-                  fontFamily="Georgia, 'Noto Serif TC', serif"
-                >
-                  {label}
-                </text>
+                {band.id === 5 ? (
+                  <text
+                    x={cx}
+                    y={textY}
+                    textAnchor="middle"
+                    fill="#fbf7ef"
+                    fontFamily="Georgia, 'Noto Serif TC', serif"
+                  >
+                    <tspan x={cx} fontSize={13}>
+                      L5
+                    </tspan>
+                    <tspan x={cx} dy={18} fontSize={15}>
+                      {short}
+                    </tspan>
+                  </text>
+                ) : (
+                  <text
+                    x={cx}
+                    y={textY}
+                    textAnchor="middle"
+                    fill="#fbf7ef"
+                    fontSize={16}
+                    fontFamily="Georgia, 'Noto Serif TC', serif"
+                  >
+                    {`L${band.id} · ${title}`}
+                  </text>
+                )}
               </g>
             </a>
           );
