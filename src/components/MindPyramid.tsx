@@ -5,39 +5,53 @@ import { bilingualTitle } from "@/lib/i18n";
 import { levels } from "@/lib/site";
 import { useLocale } from "./LocaleProvider";
 
-const geometry = [
-  { id: 5, top: 6, height: 108, topW: 0, botW: 300 },
-  { id: 4, top: 114, height: 82, topW: 300, botW: 452 },
-  { id: 3, top: 204, height: 82, topW: 452, botW: 620 },
-  { id: 2, top: 294, height: 82, topW: 620, botW: 792 },
-  { id: 1, top: 384, height: 92, topW: 792, botW: 960 },
-] as const;
+/** One isosceles triangle, sliced into five bands. Height ≈ 0.81 × base so the apex is a real triangle, not a flat cap. */
+const CX = 500;
+const APEX_Y = 22;
+const BASE_Y = 556;
+const BASE_W = 660;
+const VIEW_W = 1000;
+const VIEW_H = 580;
 
-function bandPoints(cx: number, top: number, height: number, topW: number, botW: number) {
-  const y2 = top + height;
-  if (topW === 0) {
-    return `${cx},${top} ${cx + botW / 2},${y2} ${cx - botW / 2},${y2}`;
+function widthAt(y: number) {
+  return BASE_W * ((y - APEX_Y) / (BASE_Y - APEX_Y));
+}
+
+const geometry = ([5, 4, 3, 2, 1] as const).map((id, index) => {
+  const top = APEX_Y + ((BASE_Y - APEX_Y) * index) / 5;
+  const bottom = APEX_Y + ((BASE_Y - APEX_Y) * (index + 1)) / 5;
+  return {
+    id,
+    top,
+    bottom,
+    height: bottom - top,
+    topW: widthAt(top),
+    botW: widthAt(bottom),
+  };
+});
+
+function bandPoints(top: number, bottom: number, topW: number, botW: number) {
+  if (topW < 1) {
+    return `${CX},${top} ${CX + botW / 2},${bottom} ${CX - botW / 2},${bottom}`;
   }
-  return `${cx - topW / 2},${top} ${cx + topW / 2},${top} ${cx + botW / 2},${y2} ${cx - botW / 2},${y2}`;
+  return `${CX - topW / 2},${top} ${CX + topW / 2},${top} ${CX + botW / 2},${bottom} ${CX - botW / 2},${bottom}`;
 }
 
 export function MindPyramid() {
   const locale = useLocale();
   const [hover, setHover] = useState<number | null>(null);
-  const cx = 500;
   const active = levels.find((level) => level.id === hover) ?? levels[2];
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] lg:items-center">
-      <svg viewBox="0 0 1000 500" className="h-auto w-full drop-shadow-2xl" role="img" aria-label="Map of Our Mind">
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)] lg:items-center">
+      <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} className="h-auto w-full drop-shadow-2xl" role="img" aria-label="Map of Our Mind">
         <title>Map of Our Mind</title>
         {geometry.map((band) => {
           const meta = levels.find((level) => level.id === band.id)!;
-          const title = locale === "en" ? meta.en : meta.zh;
-          const short =
-            band.id === 5 ? (locale === "en" ? "Metaphysics" : "形而上學") : title;
+          const short = locale === "en" ? meta.nav.en : meta.nav.zh;
           const lit = hover === band.id;
-          const textY = band.topW === 0 ? band.top + band.height * 0.62 : band.top + band.height / 2 + 5;
+          const isApex = band.id === 5;
+          const textY = isApex ? band.top + band.height * 0.68 : (band.top + band.bottom) / 2 + 5;
           return (
             <a key={band.id} href={`/level/${band.id}`}>
               <g
@@ -46,39 +60,27 @@ export function MindPyramid() {
                 className="cursor-pointer"
               >
                 <polygon
-                  points={bandPoints(cx, band.top, band.height, band.topW, band.botW)}
+                  points={bandPoints(band.top, band.bottom, band.topW, band.botW)}
                   fill={meta.color}
                   opacity={hover === null || lit ? 0.96 : 0.55}
-                  stroke={lit ? "#fbf7ef" : "rgba(251,247,239,0.35)"}
-                  strokeWidth={lit ? 3 : 1}
+                  stroke={lit ? "#fbf7ef" : "rgba(251,247,239,0.4)"}
+                  strokeWidth={lit ? 3 : 1.25}
+                  strokeLinejoin="round"
                 />
-                {band.id === 5 ? (
-                  <text
-                    x={cx}
-                    y={textY}
-                    textAnchor="middle"
-                    fill="#fbf7ef"
-                    fontFamily="Georgia, 'Noto Serif TC', serif"
-                  >
-                    <tspan x={cx} fontSize={13}>
-                      L5
-                    </tspan>
-                    <tspan x={cx} dy={18} fontSize={15}>
-                      {short}
-                    </tspan>
-                  </text>
-                ) : (
-                  <text
-                    x={cx}
-                    y={textY}
-                    textAnchor="middle"
-                    fill="#fbf7ef"
-                    fontSize={16}
-                    fontFamily="Georgia, 'Noto Serif TC', serif"
-                  >
-                    {`L${band.id} · ${title}`}
-                  </text>
-                )}
+                <text
+                  x={CX}
+                  y={textY}
+                  textAnchor="middle"
+                  fill="#fbf7ef"
+                  fontFamily="Georgia, 'Noto Serif TC', serif"
+                >
+                  <tspan x={CX} fontSize={isApex ? 12 : 13} fill="rgba(251,247,239,0.8)">
+                    L{band.id}
+                  </tspan>
+                  <tspan x={CX} dy={isApex ? 16 : 18} fontSize={isApex ? 15 : 16}>
+                    {short}
+                  </tspan>
+                </text>
               </g>
             </a>
           );
