@@ -248,7 +248,7 @@ export function LabConsole() {
     return (
       <div className="mx-auto max-w-md px-4 py-16">
         <p className="text-xs tracking-[0.3em] text-copper">BACK DOOR</p>
-        <h1 className="mt-2 font-serif text-3xl">Digital Brain Lab</h1>
+        <h1 className="mt-2 font-serif text-3xl">Mind-Note Lab</h1>
         <p className="mt-3 text-sm leading-relaxed text-ink-soft">
           新增頁面、筆記與資源的後門。本地預設金鑰見 README 的 <code>NPI_LAB_KEY</code>。生產環境必須自行設定環境變數。
         </p>
@@ -277,7 +277,7 @@ export function LabConsole() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="text-xs tracking-wide text-copper">Content backdoor</p>
-          <h1 className="font-serif text-3xl">Digital Brain Lab</h1>
+          <h1 className="font-serif text-3xl">Mind-Note Lab</h1>
         </div>
         <div className="flex flex-wrap gap-2 text-sm">
           <button type="button" className="rounded-full border border-rule px-3 py-1" onClick={addNote}>
@@ -416,7 +416,7 @@ export function LabConsole() {
             className="min-h-24 rounded-lg border border-rule bg-paper px-3 py-2"
           />
           <button type="submit" className="rounded-full bg-night px-4 py-2 text-sm text-paper-2">
-            寫入第二大腦
+            寫入 Mind-Note
           </button>
         </form>
       ) : null}

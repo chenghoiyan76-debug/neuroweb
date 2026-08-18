@@ -1,6 +1,8 @@
-# Digital Brain · 數位筆記
+# Mind-Note
 
-個人化第二大腦：以五層金字塔（Map of Our Mind）索引神經科學、心理動力、臨床精神醫學與東方哲學。
+Study on psychology, neuroscience and philosophy.
+
+心理學、神經科學與哲學的研讀筆記。以五層金字塔（Map of Our Mind）作為索引。
 
 繁中版於術語後括注英文，例如：依附理論 (Attachment Theory)。亦可切換完整英文版。
 

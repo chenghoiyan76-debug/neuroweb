@@ -16,7 +16,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-rule/80 bg-paper/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
         <Link href="/" className="flex min-w-0 items-baseline gap-2">
-          <span className="font-serif text-lg tracking-tight">{locale === "en" ? site.name : site.nameZh}</span>
+          <span className="font-serif text-lg tracking-tight">{site.name}</span>
           <span className="hidden truncate text-[11px] text-ink-soft sm:inline">{t.brandSub}</span>
         </Link>
         <nav className="ml-auto hidden items-center gap-1 lg:flex">

@@ -26,7 +26,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} · ${site.nameZh}`,
+    default: `${site.name}: ${site.study.en}`,
     template: `%s · ${site.name}`,
   },
   description: `${site.description.zh} / ${site.description.en}`,

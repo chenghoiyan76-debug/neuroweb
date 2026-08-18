@@ -4,15 +4,19 @@ import type { LevelMeta } from "@/lib/types";
 export { term };
 
 export const site = {
-  name: "Digital Brain",
-  nameZh: "數位筆記",
+  name: "Mind-Note",
+  nameZh: "Mind-Note",
+  study: {
+    zh: "心理學、神經科學與哲學的研讀",
+    en: "Study on psychology, neuroscience and philosophy",
+  },
   tagline: {
-    zh: "心智地圖 (Map of Our Mind) · 從結構到形而上學的第二大腦",
-    en: "Map of Our Mind · a second brain from structure to metaphysics",
+    zh: "心理學、神經科學與哲學的研讀 · 心智地圖 (Map of Our Mind)",
+    en: "Study on psychology, neuroscience and philosophy · Map of Our Mind",
   },
   description: {
-    zh: "個人化的數位筆記：以五層金字塔索引神經科學、心理動力、臨床精神醫學與東方哲學。繁中版於術語後括注英文。",
-    en: "A personal digital brain indexed as a five-level pyramid: neuroscience, psychodynamics, clinical psychiatry, and Eastern philosophy.",
+    zh: "Mind-Note：心理學、神經科學與哲學的研讀筆記。以五層金字塔索引心智結構、測量、互動、臨床界線與形而上學。繁中版於術語後括注英文。",
+    en: "Mind-Note: a study on psychology, neuroscience and philosophy, indexed as a five-level pyramid from the structure of mind to metaphysics.",
   },
 };
 

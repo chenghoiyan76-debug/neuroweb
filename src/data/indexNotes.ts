@@ -55,11 +55,11 @@ export const indexNotes: Note[] = [
       {
         type: "quote",
         text: "知識依照思考邏輯自然生長，而不是依照科別堆積。",
-        cite: "Digital Brain",
+        cite: "Mind-Note",
       },
       {
         type: "p",
-        text: `這座${term("Map of Our Mind", "心智地圖")}把先前龐大的知識網站收斂成個人化第二大腦。Level 1 問心智是什麼；Level 2 把它變成數據；Level 3 看迴路如何即時互動；Level 4 處理失衡與修復；Level 5 承認科學盡頭是哲學。`,
+        text: `這座${term("Map of Our Mind", "心智地圖")}是 Mind-Note 的索引：心理學、神經科學與哲學的研讀。Level 1 問心智是什麼；Level 2 把它變成數據；Level 3 看迴路如何即時互動；Level 4 處理失衡與修復；Level 5 承認科學盡頭是哲學。`,
       },
       {
         type: "ul",
