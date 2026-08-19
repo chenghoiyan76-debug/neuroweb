@@ -1,24 +1,21 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
 import { ui, type Locale } from "@/lib/i18n";
-import { useLocale } from "@/components/LocaleProvider";
+import { useLocale, useSetLocale } from "@/components/LocaleProvider";
 
 export function LanguageSwitcher() {
   const locale = useLocale();
-  const router = useRouter();
-  const [pending, startTransition] = useTransition();
+  const setLocale = useSetLocale();
   const t = ui[locale];
 
-  async function choose(next: Locale) {
+  function choose(next: Locale) {
     if (next === locale) return;
-    await fetch("/api/locale", {
+    setLocale(next);
+    void fetch("/api/locale", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ locale: next }),
-    });
-    startTransition(() => router.refresh());
+    }).catch(() => undefined);
   }
 
   return (
@@ -29,8 +26,7 @@ export function LanguageSwitcher() {
     >
       <button
         type="button"
-        disabled={pending}
-        onClick={() => void choose("zh")}
+        onClick={() => choose("zh")}
         className={`rounded-full px-2.5 py-1 ${
           locale === "zh" ? "bg-night text-paper-2" : "text-ink-soft hover:text-ink"
         }`}
@@ -39,8 +35,7 @@ export function LanguageSwitcher() {
       </button>
       <button
         type="button"
-        disabled={pending}
-        onClick={() => void choose("en")}
+        onClick={() => choose("en")}
         className={`rounded-full px-2.5 py-1 ${
           locale === "en" ? "bg-night text-paper-2" : "text-ink-soft hover:text-ink"
         }`}

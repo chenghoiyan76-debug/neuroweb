@@ -14,16 +14,26 @@ export default function ContactPage() {
 
   async function onSubmit(form: FormData) {
     setStatus("sending");
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: String(form.get("name") ?? ""),
-        email: String(form.get("email") ?? ""),
-        message: String(form.get("message") ?? ""),
-      }),
-    });
-    setStatus(response.ok ? "sent" : "error");
+    const name = String(form.get("name") ?? "");
+    const email = String(form.get("email") ?? "");
+    const message = String(form.get("message") ?? "");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (response.ok) {
+        setStatus("sent");
+        return;
+      }
+    } catch {
+      // Static hosting has no API; fall through to mailto.
+    }
+    const subject = encodeURIComponent(`Mind-Note · ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} <${email}>`);
+    window.location.href = `mailto:${content.profile.email}?subject=${subject}&body=${body}`;
+    setStatus("sent");
   }
 
   return (

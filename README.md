@@ -14,6 +14,8 @@ npm run dev
 
 開啟 http://localhost:3000
 
+公開網站（GitHub Pages）：https://chenghoiyan76-debug.github.io/neuroweb/
+
 ## 頁面結構
 
 | 區塊 | 路徑 | 說明 |
