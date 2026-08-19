@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   basePath: basePath || undefined,
   trailingSlash: isGitHubPages,
   images: { unoptimized: true },
+  allowedDevOrigins: ["*.trycloudflare.com"],
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
   },
