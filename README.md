@@ -16,6 +16,8 @@ npm run dev
 
 公開網站（GitHub Pages）：https://chenghoiyan76-debug.github.io/neuroweb/
 
+合併到 `main` 後，GitHub Actions 會自動更新這個網址。後台編輯內容若要出現在公開網站，需把 `data/site-content.json` 一併提交。
+
 ## 頁面結構
 
 | 區塊 | 路徑 | 說明 |
