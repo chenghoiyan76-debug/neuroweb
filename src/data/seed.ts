@@ -6,7 +6,7 @@ export const seedContent: SiteContent = {
   version: 1,
   updatedAt: "2026-08-19",
   profile: {
-    siteName: "Mind-Note",
+    siteName: "Yanis Cheng Note",
     personName: { zh: "Yanyan Cheng", en: "Yanyan Cheng" },
     tagline: {
       zh: "心理學、神經科學與哲學的研讀 · 專案、筆記、書評與反思",
@@ -19,7 +19,7 @@ export const seedContent: SiteContent = {
     about: {
       zh: `## 這是誰的筆記
 
-我是 {{Yanyan Cheng|Yanyan Cheng}}。Mind-Note 是個人網站：一邊記錄正在做的特殊教育需要與精神健康專案，一邊把讀書、書評與自我反思放在同一張桌上。
+我是 {{Yanyan Cheng|Yanyan Cheng}}。Yanis Cheng Note 是個人網站：一邊記錄正在做的特殊教育需要與精神健康專案，一邊把讀書、書評與自我反思放在同一張桌上。
 
 這不是給大眾的衛教入口，也不是診所官網。它比較像一本持續改寫的研究室筆記——結構要清楚，內容要長得動。
 
@@ -45,7 +45,7 @@ export const seedContent: SiteContent = {
 - 香港資源數字會過時，請以官方資訊為準。`,
       en: `## Whose notes these are
 
-I am Yanyan Cheng. Mind-Note is a personal site: it records special-needs and mental-health projects on one side, and study notes, book reviews, and self-reflection on the other.
+I am Yanyan Cheng. Yanis Cheng Note is a personal site: it records special-needs and mental-health projects on one side, and study notes, book reviews, and self-reflection on the other.
 
 This is not a public psychoeducation portal, and not a clinic website. It is closer to a lab notebook that keeps being rewritten — the structure should stay clear, and the content should be able to grow.
 
@@ -524,13 +524,13 @@ That is why 'knowing it is harmful' so often loses to 'seeing the cue'. Treatmen
 - {{特質|Traits}}：例如 {{五大人格|Big Five}}，適合描述穩定傾向。
 - {{敘事自我|narrative self}} 與 {{心理動力|psychodynamics}}：適合描述衝突、防衛與改變如何發生。
 
-只讀特質，人會變成分數。只讀故事，人會變成無法比較的孤例。Mind-Note 選擇並讀。`,
+只讀特質，人會變成分數。只讀故事，人會變成無法比較的孤例。Yanis Cheng Note 選擇並讀。`,
         `## Two layers in traditional psychology
 
 - Traits: for example the Big Five, good at describing stable tendencies.
 - Narrative self and psychodynamics: good at describing conflict, defence, and how change happens.
 
-Traits alone turn a person into scores. Stories alone turn a person into an incomparable case. Mind-Note reads both.`,
+Traits alone turn a person into scores. Stories alone turn a person into an incomparable case. Yanis Cheng Note reads both.`,
       ),
     },
     {
@@ -610,12 +610,12 @@ Pick a start so small it is almost silly (one sentence, two minutes with the fil
       body: body(
         `## 為什麼還要讀
 
-Mischel 不是要取消人格，而是要求我們說明：特質在哪一種情境會出現。對 Mind-Note 的人格頁來說，這是把五大人格從標籤拉回預測的一步。
+Mischel 不是要取消人格，而是要求我們說明：特質在哪一種情境會出現。對 Yanis Cheng Note 的人格頁來說，這是把五大人格從標籤拉回預測的一步。
 
 > 人不是平均分數；人是在條件下重複出現的模式。`,
         `## Why still read it
 
-Mischel does not cancel personality. He demands that we say in which situations a trait shows up. For the personality page on Mind-Note, this pulls the Big Five back from labels toward prediction.
+Mischel does not cancel personality. He demands that we say in which situations a trait shows up. For the personality page on Yanis Cheng Note, this pulls the Big Five back from labels toward prediction.
 
 > A person is not an average score; a person is a pattern that repeats under conditions.`,
       ),
@@ -755,8 +755,8 @@ When clinical reading collapses into disorder names, I come back here to remembe
         en: "Clinical books read too fast become a collection. I allow myself one mechanism a week, written onto this page.",
       },
       body: body(
-        `Mind-Note 的更新節奏應該像消化，而不是像發佈。後台存在，是為了讓我敢寫短。`,
-        `Mind-Note should update like digestion, not like publishing. Admin exists so that I dare to write short.`,
+        `Yanis Cheng Note 的更新節奏應該像消化，而不是像發佈。後台存在，是為了讓我敢寫短。`,
+        `Yanis Cheng Note should update like digestion, not like publishing. Admin exists so that I dare to write short.`,
       ),
     },
     {

@@ -1,4 +1,4 @@
-# Mind-Note
+# Yanis Cheng Note
 
 Yanyan Cheng 的個人網站：專案、讀書筆記、書評與自我反思。
 
@@ -32,17 +32,17 @@ npm run dev
 
 ## 管理後台
 
-入口：頁尾 **Admin**，或直接開 `/admin`（需密碼）。後台只在本機 `npm run dev` 可用，GitHub Pages 靜態站沒有 API。
+入口：頁尾 **Admin**，或直接開 `/admin`（需密碼）。
 
-- 開發環境預設密碼：`MindNoteStudio`（見 `.env.example` 的 `ADMIN_KEY`）
-- 生產環境必須自行設定 `ADMIN_KEY`，未設定則拒絕登入
+- 預設密碼：`MindNoteStudio`（見 `.env.example` 的 `ADMIN_KEY` / `NEXT_PUBLIC_ADMIN_KEY`）
+- 本機 `npm run dev` 會把內容寫入 `data/site-content.json`
+- GitHub Pages 沒有 API，後台仍可登入：編輯存在這個瀏覽器，按儲存會下載 JSON；把檔案放到倉庫的 `data/site-content.json` 並提交後，公開網站才會永久更新
 - 左側資料夾樹對應前台路徑：在哪個資料夾新增頁面，該頁就會出現在該路徑
   - 專案 → 特殊教育需要／精神健康 → 計劃／資源
   - 讀書筆記 → 場次 → 主題（含巢狀，例如介入）→ 筆記
   - 書評 → 文類 → 書評
   - 自我反思、關於我、聯絡、收件匣、匯入／匯出
 - 讀書筆記可在場次或主題下新增子資料夾（自訂主題）
-- 儲存後寫入 `data/site-content.json`，可用匯入／匯出做版本控管
 
 ## 原則
 

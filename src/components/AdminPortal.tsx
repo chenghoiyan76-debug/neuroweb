@@ -5,6 +5,14 @@ import { useRouter } from "next/navigation";
 import { useContent } from "@/components/ContentProvider";
 import { useLocale } from "@/components/LocaleProvider";
 import { ancestorIds, buildAdminTree, findAdminNode, parentAdminId, type AdminNode } from "@/lib/admin-tree";
+import {
+  loginAdmin,
+  logoutAdmin,
+  probeSession,
+  readLocalContent,
+  saveAdminContent,
+  type AdminMode,
+} from "@/lib/admin-client";
 import { pick, ui } from "@/lib/i18n";
 import { newId, slugify, today } from "@/lib/markdown";
 import { allTopicRows } from "@/lib/query";
@@ -41,9 +49,10 @@ export function AdminPortal() {
   const initial = useContent();
   const router = useRouter();
   const [authed, setAuthed] = useState<boolean | null>(null);
+  const [mode, setMode] = useState<AdminMode>("local");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [draft, setDraft] = useState<SiteContent>(initial);
+  const [draft, setDraft] = useState<SiteContent>(() => readLocalContent() ?? initial);
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [selectedId, setSelectedId] = useState("root");
   const [expanded, setExpanded] = useState<Set<string>>(initialExpanded);
@@ -55,10 +64,10 @@ export function AdminPortal() {
   const trail = trailIds.map((id) => findAdminNode(tree, id)).filter((node): node is AdminNode => Boolean(node));
 
   useEffect(() => {
-    fetch("/api/admin/session", { cache: "no-store" })
-      .then((response) => response.json())
-      .then((data: { ok?: boolean }) => setAuthed(Boolean(data.ok)))
-      .catch(() => setAuthed(false));
+    void probeSession().then(({ authed: ok, mode: nextMode }) => {
+      setAuthed(ok);
+      setMode(nextMode);
+    });
   }, []);
 
   function select(id: string, extra: string[] = []) {
@@ -79,38 +88,30 @@ export function AdminPortal() {
   async function login(event: React.FormEvent) {
     event.preventDefault();
     setError("");
-    const response = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
-    if (!response.ok) {
+    const result = await loginAdmin(password);
+    if (!result.ok) {
       setError(locale === "en" ? "Incorrect password." : "密碼不正確。");
       return;
     }
+    setMode(result.mode);
     setAuthed(true);
   }
 
   async function save(next = draft) {
     setStatus("saving");
-    const response = await fetch("/api/admin/content", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(next),
-    });
-    if (!response.ok) {
+    try {
+      const saved = await saveAdminContent(next, mode);
+      setDraft(saved);
+      setStatus("saved");
+      router.refresh();
+      setTimeout(() => setStatus("idle"), 1600);
+    } catch {
       setStatus("error");
-      return;
     }
-    const saved = (await response.json()) as SiteContent;
-    setDraft(saved);
-    setStatus("saved");
-    router.refresh();
-    setTimeout(() => setStatus("idle"), 1600);
   }
 
   async function logout() {
-    await fetch("/api/admin/logout", { method: "POST" });
+    await logoutAdmin(mode);
     setAuthed(false);
   }
 
@@ -238,8 +239,8 @@ export function AdminPortal() {
         <h1 className="font-serif text-3xl">{t.login}</h1>
         <p className="mt-2 text-sm text-ink-soft">
           {locale === "en"
-            ? "Password is ADMIN_KEY. Local default: MindNoteStudio"
-            : "密碼為 ADMIN_KEY。本機預設：MindNoteStudio"}
+            ? "Password is ADMIN_KEY. Default: MindNoteStudio"
+            : "密碼為 ADMIN_KEY。預設：MindNoteStudio"}
         </p>
         <form className="mt-6 grid gap-3" onSubmit={(event) => void login(event)}>
           <input
@@ -266,6 +267,7 @@ export function AdminPortal() {
         <div>
           <h1 className="font-serif text-3xl">{t.admin}</h1>
           <p className="mt-1 text-sm text-ink-soft">{t.adminTreeHelp}</p>
+          {mode === "local" ? <p className="mt-1 text-xs text-copper">{t.adminLocalMode}</p> : null}
         </div>
         <div className="flex items-center gap-2">
           <span className="text-xs text-ink-soft">

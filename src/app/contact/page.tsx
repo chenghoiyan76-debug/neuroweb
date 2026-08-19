@@ -5,6 +5,7 @@ import { useContent } from "@/components/ContentProvider";
 import { useLocale } from "@/components/LocaleProvider";
 import { PageHero } from "@/components/Ui";
 import { pick, ui } from "@/lib/i18n";
+import { withBase } from "@/lib/site";
 
 export default function ContactPage() {
   const locale = useLocale();
@@ -18,7 +19,7 @@ export default function ContactPage() {
     const email = String(form.get("email") ?? "");
     const message = String(form.get("message") ?? "");
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(withBase("/api/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),
@@ -30,7 +31,7 @@ export default function ContactPage() {
     } catch {
       // Static hosting has no API; fall through to mailto.
     }
-    const subject = encodeURIComponent(`Mind-Note · ${name}`);
+      const subject = encodeURIComponent(`${content.profile.siteName} · ${name}`);
     const body = encodeURIComponent(`${message}\n\n— ${name} <${email}>`);
     window.location.href = `mailto:${content.profile.email}?subject=${subject}&body=${body}`;
     setStatus("sent");

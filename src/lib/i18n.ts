@@ -43,7 +43,7 @@ export const ui = {
     resources: "資源",
     disclaimer: "聲明",
     disclaimerText:
-      "這是 Mind-Note 的個人研讀與實踐筆記，不是臨床指引，不能取代個別評估、治療或官方 DSM-5 / DSM-5-TR 文本。不重製受著作權保護的診斷準則原文。",
+      "這是 Yanis Cheng Note 的個人研讀與實踐筆記，不是臨床指引，不能取代個別評估、治療或官方 DSM-5 / DSM-5-TR 文本。不重製受著作權保護的診斷準則原文。",
     updated: "更新",
     emptySection: "這一頁尚無內容。可在管理後台新增。",
     addViaAdmin: "到管理後台新增",
@@ -52,7 +52,7 @@ export const ui = {
     explore: "開始閱讀",
     sessions: "五個研讀場次",
     openIndex: "進入目錄",
-    searchLead: "在 Mind-Note 裡搜尋",
+    searchLead: "在 Yanis Cheng Note 裡搜尋",
     searchHelp: "可用中文或英文搜尋專案、筆記、書評與反思。",
     searchPlaceholder: "ADHD、拖延、人格、香港資源…",
     noResults: "沒有符合的結果。",
@@ -120,6 +120,8 @@ export const ui = {
     subfolders: "子資料夾",
     files: "檔案",
     openFolder: "開啟",
+    adminLocalMode:
+      "公開網站沒有伺服器。這個瀏覽器可以登入與編輯；按儲存會下載 JSON，前台也會立刻用這份內容預覽。",
   },
   en: {
     brandSub: "Study on psychology, neuroscience and philosophy",
@@ -138,7 +140,7 @@ export const ui = {
     resources: "Resources",
     disclaimer: "Disclaimer",
     disclaimerText:
-      "These are personal study and practice notes for Mind-Note, not clinical guidelines. They do not replace individual assessment, treatment, or official DSM-5 / DSM-5-TR text. Copyrighted diagnostic criteria are not reproduced.",
+      "These are personal study and practice notes for Yanis Cheng Note, not clinical guidelines. They do not replace individual assessment, treatment, or official DSM-5 / DSM-5-TR text. Copyrighted diagnostic criteria are not reproduced.",
     updated: "Updated",
     emptySection: "Nothing here yet. Add it in the admin site.",
     addViaAdmin: "Add via admin",
@@ -147,7 +149,7 @@ export const ui = {
     explore: "Start reading",
     sessions: "Five study sessions",
     openIndex: "Open index",
-    searchLead: "Search Mind-Note",
+    searchLead: "Search Yanis Cheng Note",
     searchHelp: "Search projects, notes, book reviews, and reflections in Chinese or English.",
     searchPlaceholder: "ADHD, procrastination, personality, HK resources…",
     noResults: "No matching results.",
@@ -215,5 +217,7 @@ export const ui = {
     subfolders: "Subfolders",
     files: "Files",
     openFolder: "Open",
+    adminLocalMode:
+      "This public site has no server. You can sign in and edit in this browser. Save downloads JSON and the public pages preview the new content immediately.",
   },
 } as const;
