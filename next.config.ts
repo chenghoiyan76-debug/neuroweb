@@ -1,10 +1,11 @@
 import type { NextConfig } from "next";
 
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
+const isStaticExport = isGitHubPages || process.env.STATIC_EXPORT === "true";
 const basePath = isGitHubPages ? "/neuroweb" : "";
 
 const nextConfig: NextConfig = {
-  output: isGitHubPages ? "export" : undefined,
+  output: isStaticExport ? "export" : undefined,
   basePath: basePath || undefined,
   trailingSlash: isGitHubPages,
   images: { unoptimized: true },
@@ -13,7 +14,7 @@ const nextConfig: NextConfig = {
   },
 };
 
-if (!isGitHubPages) {
+if (!isStaticExport) {
   nextConfig.redirects = async () => [
     { source: "/lab", destination: "/admin", permanent: false },
     { source: "/garden", destination: "/admin", permanent: false },
