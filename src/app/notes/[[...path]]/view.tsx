@@ -36,17 +36,21 @@ export function NotesCatchAll() {
               : "五個場次：教育、臨床、精神健康（公眾）、神經科學、心理學。"
           }
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {["educational", "clinical", "mental-health", "neuroscience", "psychology"].map((slug) => {
+        <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-6">
+          {["educational", "clinical", "mental-health", "neuroscience", "psychology"].map((slug, index) => {
             const session = sessionBySlug(content, slug)!;
             return (
-              <ItemCard
+              <div
                 key={slug}
-                href={`/notes/${slug}`}
-                title={pick(session.title, locale)}
-                summary={pick(session.summary, locale)}
-                meta={pick(session.kicker, locale)}
-              />
+                className={`lg:col-span-2 ${index === 3 ? "lg:col-start-2" : index === 4 ? "lg:col-start-4" : ""}`}
+              >
+                <ItemCard
+                  href={`/notes/${slug}`}
+                  title={pick(session.title, locale)}
+                  summary={pick(session.summary, locale)}
+                  meta={pick(session.kicker, locale)}
+                />
+              </div>
             );
           })}
         </div>
