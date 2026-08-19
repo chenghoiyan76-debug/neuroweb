@@ -16,7 +16,7 @@ function subscribe(callback: () => void) {
 }
 
 function getSnapshot(): Locale {
-  const stored = window.localStorage.getItem(STORAGE_KEY);
+  const stored = window.localStorage.getItem(STORAGE_KEY) ?? undefined;
   return isLocale(stored) ? stored : defaultLocale;
 }
 
