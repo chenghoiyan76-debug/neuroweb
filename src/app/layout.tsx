@@ -5,7 +5,7 @@ import { ContentProvider } from "@/components/ContentProvider";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { defaultLocale } from "@/lib/i18n";
+import { getLocale } from "@/lib/locale";
 import { readSiteContent } from "@/lib/repository";
 import "./globals.css";
 
@@ -21,6 +21,8 @@ const notoSerif = Noto_Serif_TC({
   weight: ["500", "600", "700"],
 });
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   const content = await readSiteContent();
   return {
@@ -33,14 +35,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const content = await readSiteContent();
+  const [content, locale] = await Promise.all([readSiteContent(), getLocale()]);
   return (
     <html
-      lang={defaultLocale === "en" ? "en" : "zh-Hant"}
+      lang={locale === "en" ? "en" : "zh-Hant"}
       className={`${notoSans.variable} ${notoSerif.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-paper text-ink">
-        <LocaleProvider locale={defaultLocale}>
+        <LocaleProvider locale={locale}>
           <ContentProvider initial={content}>
             <SiteHeader />
             <main className="flex-1">{children}</main>

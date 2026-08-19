@@ -1,13 +1,10 @@
-"use client";
-
 import Link from "next/link";
-import { useContent } from "@/components/ContentProvider";
-import { useLocale } from "@/components/LocaleProvider";
 import { pick, ui } from "@/lib/i18n";
+import { getLocale } from "@/lib/locale";
+import { readSiteContent } from "@/lib/repository";
 
-export function SiteFooter() {
-  const locale = useLocale();
-  const content = useContent();
+export async function SiteFooter() {
+  const [locale, content] = await Promise.all([getLocale(), readSiteContent()]);
   const t = ui[locale];
   return (
     <footer className="border-t border-rule bg-paper-2">

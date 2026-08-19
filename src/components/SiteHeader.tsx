@@ -17,11 +17,11 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 overflow-x-clip border-b border-rule/80 bg-paper/90 backdrop-blur lg:bg-paper">
+    <header className="sticky top-0 z-50 border-b border-rule/80 bg-paper/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-2.5">
         <Link href="/" className="flex min-w-0 shrink-0 items-baseline gap-2">
           <span className="font-serif text-lg tracking-tight">Mind-Note</span>
-          <span className="hidden truncate text-[11px] text-ink-soft 2xl:inline">{t.brandSub}</span>
+          <span className="hidden truncate text-[11px] text-ink-soft xl:inline">{t.brandSub}</span>
         </Link>
         <DesktopNav className="ml-auto hidden lg:flex" />
         <div className="ml-auto flex items-center gap-2 lg:ml-2">
@@ -108,7 +108,7 @@ function DesktopNav({ className }: { className?: string }) {
             moveBox(event.currentTarget, item.id);
           }}
         >
-          <Link href={item.href} className="relative z-10 block whitespace-nowrap px-2.5 py-2 text-[13px] text-ink xl:px-3">
+          <Link href={item.href} className="relative z-10 block whitespace-nowrap px-3 py-2 text-[13px] text-ink">
             {item.label}
           </Link>
           <Mega
@@ -172,21 +172,15 @@ function Panel({
   wide?: boolean;
   children: ReactNode;
 }) {
-  if (!open) return null;
-
-  if (wide) {
-    return (
-      <div className="fixed inset-x-0 z-50 px-4 pt-2" style={{ top: "3.35rem" }}>
-        <div className="mx-auto max-h-[min(70vh,40rem)] w-full max-w-6xl overflow-auto rounded-2xl border border-rule bg-paper-2 p-4 shadow-xl">
-          {children}
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className={`absolute top-full z-50 pt-2 ${alignEnd ? "right-0" : "left-0"}`}>
-      <div className="w-72 max-w-[calc(100vw-2rem)] rounded-2xl border border-rule bg-paper-2 p-4 shadow-xl">
+    <div
+      className={`absolute top-full z-50 pt-2 transition duration-150 ${
+        alignEnd ? "right-0" : "left-0"
+      } ${open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"}`}
+    >
+      <div
+        className={`${wide ? "w-[min(44rem,calc(100vw-2rem))]" : "w-[min(22rem,calc(100vw-2rem))]"} rounded-2xl border border-rule bg-paper-2 p-4 shadow-xl`}
+      >
         {children}
       </div>
     </div>
@@ -232,7 +226,7 @@ function NotesMenu() {
   return (
     <div>
       <p className="text-[11px] tracking-[0.22em] uppercase text-indigo">{t.sessions}</p>
-      <div className="mt-3 grid max-h-[60vh] gap-4 overflow-auto sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mt-3 grid max-h-[70vh] gap-4 overflow-auto sm:grid-cols-2 lg:grid-cols-3">
         {sessions.map((session) => (
           <div key={session.slug}>
             <Link href={`/notes/${session.slug}`} className="font-serif text-base hover:text-teal-deep">
