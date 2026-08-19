@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fbooks\u002F[[...path]]","\u002Fnotes\u002F[[...path]]","\u002Fprojects\u002F[[...path]]","\u002Freflection\u002F[slug]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
