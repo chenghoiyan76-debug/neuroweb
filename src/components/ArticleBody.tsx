@@ -2,7 +2,6 @@
 
 import { applyTerms, pick } from "@/lib/i18n";
 import { parseMarkdown } from "@/lib/markdown";
-import { withBase } from "@/lib/site";
 import type { LocaleText } from "@/lib/types";
 import { useLocale as useLocaleCtx } from "@/components/LocaleProvider";
 
@@ -13,7 +12,7 @@ function renderInline(text: string, locale: "zh" | "en") {
     const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (link) {
       return (
-        <a key={index} href={withBase(link[2])}>
+        <a key={index} href={link[2]}>
           {link[1]}
         </a>
       );

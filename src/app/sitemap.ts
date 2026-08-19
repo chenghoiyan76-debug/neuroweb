@@ -1,9 +1,6 @@
 import type { MetadataRoute } from "next";
 import { flattenTopics, projectAreas, projectKinds, bookGenres, studySessions } from "@/lib/taxonomy";
 import { readSiteContent } from "@/lib/repository";
-import { siteUrl } from "@/lib/site";
-
-export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await readSiteContent();
@@ -37,5 +34,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     urls.add(`/reflection/${item.slug}`);
   }
 
-  return [...urls].map((path) => ({ url: siteUrl(path) }));
+  return [...urls].map((url) => ({ url }));
 }

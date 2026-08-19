@@ -14,10 +14,6 @@ npm run dev
 
 開啟 http://localhost:3000
 
-公開網站（GitHub Pages）：https://chenghoiyan76-debug.github.io/neuroweb/
-
-合併到 `main` 後，GitHub Actions 會自動更新這個網址。後台編輯內容若要出現在公開網站，需把 `data/site-content.json` 一併提交。
-
 ## 頁面結構
 
 | 區塊 | 路徑 | 說明 |
@@ -32,17 +28,13 @@ npm run dev
 
 ## 管理後台
 
-入口：頁尾 **Admin**，或直接開 `/admin`（需密碼）。後台只在本機 `npm run dev` 可用，GitHub Pages 靜態站沒有 API。
+入口：頁尾 **Admin**，或直接開 `/admin`（需密碼）。
 
 - 開發環境預設密碼：`MindNoteStudio`（見 `.env.example` 的 `ADMIN_KEY`）
 - 生產環境必須自行設定 `ADMIN_KEY`，未設定則拒絕登入
-- 左側資料夾樹對應前台路徑：在哪個資料夾新增頁面，該頁就會出現在該路徑
-  - 專案 → 特殊教育需要／精神健康 → 計劃／資源
-  - 讀書筆記 → 場次 → 主題（含巢狀，例如介入）→ 筆記
-  - 書評 → 文類 → 書評
-  - 自我反思、關於我、聯絡、收件匣、匯入／匯出
-- 讀書筆記可在場次或主題下新增子資料夾（自訂主題）
-- 儲存後寫入 `data/site-content.json`，可用匯入／匯出做版本控管
+- 可新增／編輯／刪除專案、筆記、書評、反思，並修改關於我與聯絡資料
+- 訪客留言會進後台收件匣
+- 儲存後寫入 `data/site-content.json`，可用匯出／匯入做版本控管
 
 ## 原則
 
