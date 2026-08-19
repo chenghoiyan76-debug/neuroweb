@@ -19,7 +19,7 @@ export default function HomePage() {
   return (
     <div>
       <section className="night-mesh text-paper-2">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 md:grid-cols-[1.2fr_0.8fr] md:items-end lg:items-center">
           <div>
             <p className="text-[11px] tracking-[0.28em] uppercase text-gold">{t.heroLead}</p>
             <h1 className="mt-3 font-serif text-5xl leading-tight tracking-tight md:text-6xl">
@@ -49,12 +49,14 @@ export default function HomePage() {
 
       <section className="paper-grid mx-auto max-w-6xl px-4 py-14">
         <SectionLabel>{t.sessions}</SectionLabel>
-        <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {studySessions.map((session) => (
+        <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-6">
+          {studySessions.map((session, index) => (
             <Link
               key={session.slug}
               href={`/notes/${session.slug}`}
-              className="rounded-2xl border border-rule bg-paper-2 p-5 hover:border-gold"
+              className={`rounded-2xl border border-rule bg-paper-2 p-5 hover:border-gold lg:col-span-2 ${
+                index === 3 ? "lg:col-start-2" : index === 4 ? "lg:col-start-4" : ""
+              }`}
             >
               <p className="text-[11px] tracking-[0.18em] uppercase" style={{ color: session.color }}>
                 {pick(session.kicker, locale)}
