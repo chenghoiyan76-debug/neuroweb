@@ -1,16 +1,16 @@
 1:"$Sreact.fragment"
-2:I[55086,["/neuroweb/_next/static/chunks/3fntmmi971322.js","/neuroweb/_next/static/chunks/0l_y_231cp59m.js","/neuroweb/_next/static/chunks/2np9k_ld_hwmd.js"],"AdminPortal"]
-3:I[97367,["/neuroweb/_next/static/chunks/3fntmmi971322.js","/neuroweb/_next/static/chunks/0l_y_231cp59m.js"],"OutletBoundary"]
+2:I[55086,["/_next/static/chunks/08hjwmy1npoe8.js","/_next/static/chunks/2ur0c8qxxbezd.js","/_next/static/chunks/3qa-larw27t8h.js"],"AdminPortal"]
+3:I[97367,["/_next/static/chunks/08hjwmy1npoe8.js","/_next/static/chunks/2ur0c8qxxbezd.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-8:I[97367,["/neuroweb/_next/static/chunks/3fntmmi971322.js","/neuroweb/_next/static/chunks/0l_y_231cp59m.js"],"ViewportBoundary"]
-9:I[97367,["/neuroweb/_next/static/chunks/3fntmmi971322.js","/neuroweb/_next/static/chunks/0l_y_231cp59m.js"],"MetadataBoundary"]
-a:I[27201,["/neuroweb/_next/static/chunks/3fntmmi971322.js","/neuroweb/_next/static/chunks/0l_y_231cp59m.js"],"IconMark"]
-c:I[39756,["/neuroweb/_next/static/chunks/3fntmmi971322.js","/neuroweb/_next/static/chunks/0l_y_231cp59m.js"],"default"]
-d:I[37457,["/neuroweb/_next/static/chunks/3fntmmi971322.js","/neuroweb/_next/static/chunks/0l_y_231cp59m.js"],"default"]
+8:I[97367,["/_next/static/chunks/08hjwmy1npoe8.js","/_next/static/chunks/2ur0c8qxxbezd.js"],"ViewportBoundary"]
+9:I[97367,["/_next/static/chunks/08hjwmy1npoe8.js","/_next/static/chunks/2ur0c8qxxbezd.js"],"MetadataBoundary"]
+a:I[27201,["/_next/static/chunks/08hjwmy1npoe8.js","/_next/static/chunks/2ur0c8qxxbezd.js"],"IconMark"]
+c:I[39756,["/_next/static/chunks/08hjwmy1npoe8.js","/_next/static/chunks/2ur0c8qxxbezd.js"],"default"]
+d:I[37457,["/_next/static/chunks/08hjwmy1npoe8.js","/_next/static/chunks/2ur0c8qxxbezd.js"],"default"]
 7:X
 f:X
 f:C
-0:{"buildId":"6D1jGjXplUdA3G10t0fN3","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/neuroweb/_next/static/chunks/2np9k_ld_hwmd.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Admin · Mind-Note"}],["$","meta","1",{"name":"description","content":"心理學、神經科學與哲學的研讀 · 專案、筆記、書評與反思 / Study on psychology, neuroscience and philosophy · projects, notes, reviews, and reflection"}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/neuroweb/icon.svg?icon.1tlk_fxmf3r2t.svg","sizes":"any","type":"image/svg+xml"}],["$","$La","4",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@b","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lc",null,{"parallelRouterKey":"children","template":["$","$Ld",null,{}]}]]}],"isPartial":"$@e","staleTime":"$7","varyParams":"$f"}],"isUpgradeableISRFallback":false,"a":"$@10","rootVaryParams":null,"needsRuntimeRequest":"$@11"}
+0:{"buildId":"9iy5I6QftXeQOqQE8XpzM","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/_next/static/chunks/3qa-larw27t8h.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Admin · Yanis Cheng Note"}],["$","meta","1",{"name":"description","content":"心理學、神經科學與哲學的研讀 · 專案、筆記、書評與反思 / Study on psychology, neuroscience and philosophy · projects, notes, reviews, and reflection"}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/icon.svg?icon.1tlk_fxmf3r2t.svg","sizes":"any","type":"image/svg+xml"}],["$","$La","4",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@b","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lc",null,{"parallelRouterKey":"children","template":["$","$Ld",null,{}]}]]}],"isPartial":"$@e","staleTime":"$7","varyParams":"$f"}],"isUpgradeableISRFallback":false,"a":"$@10","rootVaryParams":null,"needsRuntimeRequest":"$@11"}
 5:null
 11:true
 7:300
