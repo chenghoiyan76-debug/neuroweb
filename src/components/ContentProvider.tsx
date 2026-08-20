@@ -21,7 +21,7 @@ export function ContentProvider({
     let active = true;
     const local = readLocalContent();
 
-    fetch(withBase("/api/content"), { cache: "no-store" })
+    fetch(withBase("/api/content"), { cache: "no-store", signal: AbortSignal.timeout(2000) })
       .then((response) => (response.ok ? response.json() : null))
       .then((data: SiteContent | null) => {
         if (!active) return;

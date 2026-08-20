@@ -48,7 +48,7 @@ export function AdminPortal() {
   const t = ui[locale];
   const initial = useContent();
   const router = useRouter();
-  const [authed, setAuthed] = useState<boolean | null>(null);
+  const [authed, setAuthed] = useState(false);
   const [mode, setMode] = useState<AdminMode>("local");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -229,10 +229,6 @@ export function AdminPortal() {
     select(parentAdminId(tree, fileId) ?? "root");
   }
 
-  if (authed === null) {
-    return <div className="mx-auto max-w-lg px-4 py-24 text-sm text-ink-soft">…</div>;
-  }
-
   if (!authed) {
     return (
       <div className="mx-auto max-w-md px-4 py-24">
@@ -245,6 +241,7 @@ export function AdminPortal() {
         <form className="mt-6 grid gap-3" onSubmit={(event) => void login(event)}>
           <input
             type="password"
+            autoFocus
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder={t.password}

@@ -24,6 +24,7 @@ const notoSerif = Noto_Serif_TC({
 export async function generateMetadata(): Promise<Metadata> {
   const content = await readSiteContent();
   return {
+    metadataBase: new URL("https://www.yanischengnote.com"),
     title: {
       default: `${content.profile.siteName}: ${content.profile.tagline.en}`,
       template: `%s · ${content.profile.siteName}`,

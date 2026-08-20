@@ -14,9 +14,21 @@ npm run dev
 
 開啟 http://localhost:3000
 
-公開網站（GitHub Pages）：https://chenghoiyan76-debug.github.io/neuroweb/
+固定網址（接好 DNS 之後）：https://www.yanischengnote.com
 
-合併到 `main` 後，GitHub Actions 會自動更新這個網址。後台編輯內容若要出現在公開網站，需把 `data/site-content.json` 一併提交。
+目前網域 `yanischengnote.com` 還沒有 DNS，所以瀏覽器會打不開。請先買這個網域，然後在註冊商加上：
+
+| 類型 | 主機名稱 | 值 |
+| --- | --- | --- |
+| CNAME | `www` | `chenghoiyan76-debug.github.io` |
+| A | `@`（根網域） | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+
+加好後等幾分鐘到幾小時，再開 https://www.yanischengnote.com 。GitHub 會自動簽 HTTPS。
+
+合併到 `main` 後，GitHub Actions 會發佈到這個網域。後台在 `/admin`，預設密碼 `MindNoteStudio`。若要把編輯永久寫進網站，把下載的 JSON 放到 `data/site-content.json` 再提交。
 
 ## 頁面結構
 

@@ -28,10 +28,12 @@ jobs:
       - run: npm run build
         env:
           GITHUB_PAGES: "true"
-          NEXT_PUBLIC_BASE_PATH: /neuroweb
+          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_SITE_ORIGIN: https://www.yanischengnote.com
           NEXT_PUBLIC_ADMIN_KEY: MindNoteStudio
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: out
           branch: gh-pages
           clean: true
+          cname: www.yanischengnote.com
