@@ -16,11 +16,20 @@ npm run dev
 
 固定網址（把 Wix DNS 改成 GitHub 之後）：https://yanischeng.com
 
-你的網域 `yanischeng.com` 現在指向 **Wix**（`ns8.wixdns.net` / `ns9.wixdns.net`），所以還不是這個網站。請在 Wix 把 DNS 改成 GitHub Pages：
+你的網域 `yanischeng.com` 名稱伺服器仍在 Wix。請在 Wix → Domains → `yanischeng.com` → Manage DNS Records：
 
-1. 打開 Wix → Domains → `yanischeng.com` → Manage DNS Records（或 Connect to an external site）
-2. 刪掉／改掉現有指向 Wix 的 A 與 `www` CNAME
-3. 新增：
+1. **刪掉** 仍指向 Wix 的 A 紀錄（例如 `185.230.63.x`），只留下 GitHub 的四筆 A
+2. 把 `www` 的 CNAME 從 `initial.wixdns.net` 改成 `chenghoiyan76-debug.github.io`
+
+正確的紀錄只有這些：
+
+| 類型 | 主機名稱 | 值 |
+| --- | --- | --- |
+| A | `@`（根網域） | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `chenghoiyan76-debug.github.io` |
 
 | 類型 | 主機名稱 | 值 |
 | --- | --- | --- |
