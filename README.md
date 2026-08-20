@@ -14,19 +14,23 @@ npm run dev
 
 開啟 http://localhost:3000
 
-固定網址（接好 DNS 之後）：https://www.yanischengnote.com
+固定網址（把 Wix DNS 改成 GitHub 之後）：https://yanischeng.com
 
-目前網域 `yanischengnote.com` 還沒有 DNS，所以瀏覽器會打不開。請先買這個網域，然後在註冊商加上：
+你的網域 `yanischeng.com` 現在指向 **Wix**（`ns8.wixdns.net` / `ns9.wixdns.net`），所以還不是這個網站。請在 Wix 把 DNS 改成 GitHub Pages：
+
+1. 打開 Wix → Domains → `yanischeng.com` → Manage DNS Records（或 Connect to an external site）
+2. 刪掉／改掉現有指向 Wix 的 A 與 `www` CNAME
+3. 新增：
 
 | 類型 | 主機名稱 | 值 |
 | --- | --- | --- |
-| CNAME | `www` | `chenghoiyan76-debug.github.io` |
 | A | `@`（根網域） | `185.199.108.153` |
 | A | `@` | `185.199.109.153` |
 | A | `@` | `185.199.110.153` |
 | A | `@` | `185.199.111.153` |
+| CNAME | `www` | `chenghoiyan76-debug.github.io` |
 
-加好後等幾分鐘到幾小時，再開 https://www.yanischengnote.com 。GitHub 會自動簽 HTTPS。
+加好後等幾分鐘到幾小時，再開 https://yanischeng.com 。GitHub 會自動簽 HTTPS。
 
 合併到 `main` 後，GitHub Actions 會發佈到這個網域。後台在 `/admin`，預設密碼 `MindNoteStudio`。若要把編輯永久寫進網站，把下載的 JSON 放到 `data/site-content.json` 再提交。
 

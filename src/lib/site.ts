@@ -1,4 +1,4 @@
-export const siteOrigin = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.yanischengnote.com";
+export const siteOrigin = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://yanischeng.com";
 export const isGitHubPages = process.env.GITHUB_PAGES === "true";
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
