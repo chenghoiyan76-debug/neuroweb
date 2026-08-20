@@ -2,15 +2,17 @@ import type { NextConfig } from "next";
 
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
 const isStaticExport = isGitHubPages || process.env.STATIC_EXPORT === "true";
-const basePath = isGitHubPages ? "/neuroweb" : "";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const nextConfig: NextConfig = {
   output: isStaticExport ? "export" : undefined,
   basePath: basePath || undefined,
   trailingSlash: isGitHubPages,
   images: { unoptimized: true },
+  allowedDevOrigins: ["*.trycloudflare.com"],
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
+    NEXT_PUBLIC_SITE_ORIGIN: process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://yanischeng.com",
   },
 };
 
