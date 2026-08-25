@@ -16,7 +16,6 @@ import {
   resourceFormats,
   senAreaBySlug,
   senTags,
-  starsLabel,
   timeNeeded,
 } from "@/lib/sen-taxonomy";
 
@@ -70,10 +69,7 @@ export function ResourceDetailView({ slug }: { slug: string }) {
         />
         <Meta label={t.type} value={pick(labelOf(resourceFormats, resource.format)!, locale)} />
         <Meta label={t.filterTime} value={pick(labelOf(timeNeeded, resource.time)!, locale)} />
-        <Meta
-          label={t.difficulty}
-          value={`${starsLabel(resource.difficulty)} · ${pick(labelOf(difficultyOptions, resource.difficulty)!, locale)}`}
-        />
+        <Meta label={t.difficulty} value={pick(labelOf(difficultyOptions, resource.difficulty)!, locale)} />
       </dl>
 
       <section className="mt-10">
