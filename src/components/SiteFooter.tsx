@@ -24,9 +24,6 @@ export function SiteFooter() {
           <Link href="/contact" className="hover:text-ink">
             {t.contact}
           </Link>
-          <Link href="/admin" className="text-[11px] tracking-[0.2em] text-rule hover:text-copper">
-            Admin
-          </Link>
         </div>
       </div>
     </footer>

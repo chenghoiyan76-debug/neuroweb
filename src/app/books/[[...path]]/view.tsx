@@ -80,7 +80,7 @@ export function BooksCatchAll() {
               />
             ))
           ) : (
-            <EmptyState text={t.emptySection} href="/admin" action={t.addViaAdmin} />
+            <EmptyState text={t.emptySection} />
           )}
         </div>
       </div>

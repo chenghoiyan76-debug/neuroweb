@@ -53,11 +53,10 @@ npm run dev
 | 自我反思 | `/reflection` | 條列主題與短文 |
 | 關於 | `/about` | 個人簡介 |
 | 聯絡 | `/contact` | 聯絡表單與方式 |
-| 管理後台 | `/admin` | 新增／編輯／刪除所有內容 |
 
-## 管理後台
+## 管理後台（不公開）
 
-入口：頁尾 **Admin**，或直接開 `/admin`（需密碼）。
+前台沒有後台連結，訪客看不到。你自己直接開 `/admin`（需密碼）。
 
 - 預設密碼：`MindNoteStudio`（見 `.env.example` 的 `ADMIN_KEY` / `NEXT_PUBLIC_ADMIN_KEY`）
 - 本機 `npm run dev` 會把內容寫入 `data/site-content.json`

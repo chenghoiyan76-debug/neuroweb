@@ -109,7 +109,7 @@ export function ProjectsCatchAll() {
               />
             ))
           ) : (
-            <EmptyState text={t.emptySection} href="/admin" action={t.addViaAdmin} />
+            <EmptyState text={t.emptySection} />
           )}
         </div>
       </div>

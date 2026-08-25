@@ -182,7 +182,7 @@ export function NotesCatchAll() {
                 />
               ))
             ) : (
-              <EmptyState text={t.emptySection} href="/admin" action={t.addViaAdmin} />
+              <EmptyState text={t.emptySection} />
             )}
           </div>
         </section>

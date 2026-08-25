@@ -45,7 +45,7 @@ export default function ReflectionListPage() {
             </li>
           ))
         ) : (
-          <EmptyState text={t.emptySection} href="/admin" action={t.addViaAdmin} />
+          <EmptyState text={t.emptySection} />
         )}
       </ol>
     </div>

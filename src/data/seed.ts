@@ -36,7 +36,7 @@ export const seedContent: SiteContent = {
 - **書評**：依文類讀。
 - **自我反思**：短篇條列，把理論照回自己。
 
-內容會持續更新。新頁面與修正都走密碼保護的管理後台。
+內容會持續更新。
 
 ## 原則
 
@@ -62,7 +62,7 @@ This is not a public psychoeducation portal, and not a clinic website. It is clo
 - **Book reviews**: organised by genre.
 - **Reflection**: short listed pieces that turn theory back on myself.
 
-The site is meant to keep changing. New pages and edits go through a password-protected admin.
+The site is meant to keep changing.
 
 ## Principles
 
