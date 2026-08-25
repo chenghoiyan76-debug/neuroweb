@@ -18,6 +18,12 @@ export function SiteFooter() {
           <p className="mt-2 max-w-2xl leading-relaxed">{t.disclaimerText}</p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
+          <Link href="/improve" className="hover:text-ink">
+            {t.materials}
+          </Link>
+          <Link href="/resources" className="hover:text-ink">
+            {t.allMaterials}
+          </Link>
           <Link href="/about" className="hover:text-ink">
             {t.about}
           </Link>
