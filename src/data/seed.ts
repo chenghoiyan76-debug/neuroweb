@@ -102,7 +102,7 @@ The site is meant to keep changing.
 - 設計：減少工作記憶負荷，而不是增加提醒的音量。
 - 協作：教師、家長與學生用同一套詞描述困難。
 
-> 這是示範專案，可在後台改寫為你真正在做的計劃。
+> 這是示範專案，之後可改寫為你真正在做的計劃。
 
 ! 聲明 — 工作坊內容是教育討論，不是個別衡鑑或治療。`,
         `## Intent
@@ -115,7 +115,7 @@ Much SEN talk stops at whether a child has a diagnosis. This workshop wants a di
 - Design: reduce working-memory load, rather than raising the volume of reminders.
 - Collaborate: teacher, parent, and student describing the difficulty with the same words.
 
-> This is a sample programme. Rewrite it in admin as the work you are actually doing.
+> This is a sample programme. Rewrite it later as the work you are actually doing.
 
 ! Note — Workshop content is educational discussion, not individual assessment or therapy.`,
       ),
@@ -143,7 +143,7 @@ Much SEN talk stops at whether a child has a diagnosis. This workshop wants a di
 2. 讀寫／數學困難的教學（不是測驗手冊）
 3. 衡鑑報告的閱讀方法：問題、限制、下一步
 
-可在後台把真實書目、機構與工具補上。`,
+之後可以把真實書目、機構與工具補上。`,
         `## Why a list first
 
 A resource page should not be a pile of links. This list answers one question: if I only have a term, which kinds of reading come first.
@@ -154,7 +154,7 @@ A resource page should not be a pile of links. This list answers one question: i
 2. Teaching for literacy / maths difficulties (not test manuals)
 3. How to read an assessment report: question, limits, next step
 
-Add real titles, organisations, and tools in admin.`,
+Real titles, organisations, and tools can be added later.`,
       ),
       links: [],
       updatedAt: "2026-08-10",
@@ -458,7 +458,7 @@ If anxiety is already interfering with life, seek formal help. See the last page
 
 先問自己：現在是否安全。若有傷害自己或他人的想法，請即時致電熱線或前往急症室。
 
-! 聲明 — 數字與服務時間請以各機構官方網站為準。可在後台隨時改正。`,
+! 聲明 — 數字與服務時間請以各機構官方網站為準。`,
         `## Need someone now
 
 - Hospital Authority Mental Health Direct: 2466 7350 (24 hours)
@@ -478,7 +478,7 @@ If anxiety is already interfering with life, seek formal help. See the last page
 
 Ask first whether you are safe now. If there are thoughts of harming yourself or others, call a hotline or go to A&E.
 
-! Note — Verify numbers and hours on each organisation's official site. Correct them anytime in admin.`,
+! Note — Verify numbers and hours on each organisation's official site.`,
       ),
     },
     {
@@ -755,8 +755,8 @@ When clinical reading collapses into disorder names, I come back here to remembe
         en: "Clinical books read too fast become a collection. I allow myself one mechanism a week, written onto this page.",
       },
       body: body(
-        `Yanis Cheng Note 的更新節奏應該像消化，而不是像發佈。後台存在，是為了讓我敢寫短。`,
-        `Yanis Cheng Note should update like digestion, not like publishing. Admin exists so that I dare to write short.`,
+        `Yanis Cheng Note 的更新節奏應該像消化，而不是像發佈。寫短，是為了讓自己敢繼續寫。`,
+        `Yanis Cheng Note should update like digestion, not like publishing. Writing short is how I keep going.`,
       ),
     },
     {
