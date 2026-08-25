@@ -6,7 +6,7 @@ export const seedContent: SiteContent = {
   version: 1,
   updatedAt: "2026-08-19",
   profile: {
-    siteName: "Mind-Note",
+    siteName: "Yanis Cheng Note",
     personName: { zh: "Yanyan Cheng", en: "Yanyan Cheng" },
     tagline: {
       zh: "心理學、神經科學與哲學的研讀 · 專案、筆記、書評與反思",
@@ -19,7 +19,7 @@ export const seedContent: SiteContent = {
     about: {
       zh: `## 這是誰的筆記
 
-我是 {{Yanyan Cheng|Yanyan Cheng}}。Mind-Note 是個人網站：一邊記錄正在做的特殊教育需要與精神健康專案，一邊把讀書、書評與自我反思放在同一張桌上。
+我是 {{Yanyan Cheng|Yanyan Cheng}}。Yanis Cheng Note 是個人網站：一邊記錄正在做的特殊教育需要與精神健康專案，一邊把讀書、書評與自我反思放在同一張桌上。
 
 這不是給大眾的衛教入口，也不是診所官網。它比較像一本持續改寫的研究室筆記——結構要清楚，內容要長得動。
 
@@ -36,7 +36,7 @@ export const seedContent: SiteContent = {
 - **書評**：依文類讀。
 - **自我反思**：短篇條列，把理論照回自己。
 
-內容會持續更新。新頁面與修正都走密碼保護的管理後台。
+內容會持續更新。
 
 ## 原則
 
@@ -45,7 +45,7 @@ export const seedContent: SiteContent = {
 - 香港資源數字會過時，請以官方資訊為準。`,
       en: `## Whose notes these are
 
-I am Yanyan Cheng. Mind-Note is a personal site: it records special-needs and mental-health projects on one side, and study notes, book reviews, and self-reflection on the other.
+I am Yanyan Cheng. Yanis Cheng Note is a personal site: it records special-needs and mental-health projects on one side, and study notes, book reviews, and self-reflection on the other.
 
 This is not a public psychoeducation portal, and not a clinic website. It is closer to a lab notebook that keeps being rewritten — the structure should stay clear, and the content should be able to grow.
 
@@ -62,7 +62,7 @@ This is not a public psychoeducation portal, and not a clinic website. It is clo
 - **Book reviews**: organised by genre.
 - **Reflection**: short listed pieces that turn theory back on myself.
 
-The site is meant to keep changing. New pages and edits go through a password-protected admin.
+The site is meant to keep changing.
 
 ## Principles
 
@@ -102,7 +102,7 @@ The site is meant to keep changing. New pages and edits go through a password-pr
 - 設計：減少工作記憶負荷，而不是增加提醒的音量。
 - 協作：教師、家長與學生用同一套詞描述困難。
 
-> 這是示範專案，可在後台改寫為你真正在做的計劃。
+> 這是示範專案，之後可改寫為你真正在做的計劃。
 
 ! 聲明 — 工作坊內容是教育討論，不是個別衡鑑或治療。`,
         `## Intent
@@ -115,7 +115,7 @@ Much SEN talk stops at whether a child has a diagnosis. This workshop wants a di
 - Design: reduce working-memory load, rather than raising the volume of reminders.
 - Collaborate: teacher, parent, and student describing the difficulty with the same words.
 
-> This is a sample programme. Rewrite it in admin as the work you are actually doing.
+> This is a sample programme. Rewrite it later as the work you are actually doing.
 
 ! Note — Workshop content is educational discussion, not individual assessment or therapy.`,
       ),
@@ -143,7 +143,7 @@ Much SEN talk stops at whether a child has a diagnosis. This workshop wants a di
 2. 讀寫／數學困難的教學（不是測驗手冊）
 3. 衡鑑報告的閱讀方法：問題、限制、下一步
 
-可在後台把真實書目、機構與工具補上。`,
+之後可以把真實書目、機構與工具補上。`,
         `## Why a list first
 
 A resource page should not be a pile of links. This list answers one question: if I only have a term, which kinds of reading come first.
@@ -154,7 +154,7 @@ A resource page should not be a pile of links. This list answers one question: i
 2. Teaching for literacy / maths difficulties (not test manuals)
 3. How to read an assessment report: question, limits, next step
 
-Add real titles, organisations, and tools in admin.`,
+Real titles, organisations, and tools can be added later.`,
       ),
       links: [],
       updatedAt: "2026-08-10",
@@ -458,7 +458,7 @@ If anxiety is already interfering with life, seek formal help. See the last page
 
 先問自己：現在是否安全。若有傷害自己或他人的想法，請即時致電熱線或前往急症室。
 
-! 聲明 — 數字與服務時間請以各機構官方網站為準。可在後台隨時改正。`,
+! 聲明 — 數字與服務時間請以各機構官方網站為準。`,
         `## Need someone now
 
 - Hospital Authority Mental Health Direct: 2466 7350 (24 hours)
@@ -478,7 +478,7 @@ If anxiety is already interfering with life, seek formal help. See the last page
 
 Ask first whether you are safe now. If there are thoughts of harming yourself or others, call a hotline or go to A&E.
 
-! Note — Verify numbers and hours on each organisation's official site. Correct them anytime in admin.`,
+! Note — Verify numbers and hours on each organisation's official site.`,
       ),
     },
     {
@@ -524,13 +524,13 @@ That is why 'knowing it is harmful' so often loses to 'seeing the cue'. Treatmen
 - {{特質|Traits}}：例如 {{五大人格|Big Five}}，適合描述穩定傾向。
 - {{敘事自我|narrative self}} 與 {{心理動力|psychodynamics}}：適合描述衝突、防衛與改變如何發生。
 
-只讀特質，人會變成分數。只讀故事，人會變成無法比較的孤例。Mind-Note 選擇並讀。`,
+只讀特質，人會變成分數。只讀故事，人會變成無法比較的孤例。Yanis Cheng Note 選擇並讀。`,
         `## Two layers in traditional psychology
 
 - Traits: for example the Big Five, good at describing stable tendencies.
 - Narrative self and psychodynamics: good at describing conflict, defence, and how change happens.
 
-Traits alone turn a person into scores. Stories alone turn a person into an incomparable case. Mind-Note reads both.`,
+Traits alone turn a person into scores. Stories alone turn a person into an incomparable case. Yanis Cheng Note reads both.`,
       ),
     },
     {
@@ -610,12 +610,12 @@ Pick a start so small it is almost silly (one sentence, two minutes with the fil
       body: body(
         `## 為什麼還要讀
 
-Mischel 不是要取消人格，而是要求我們說明：特質在哪一種情境會出現。對 Mind-Note 的人格頁來說，這是把五大人格從標籤拉回預測的一步。
+Mischel 不是要取消人格，而是要求我們說明：特質在哪一種情境會出現。對 Yanis Cheng Note 的人格頁來說，這是把五大人格從標籤拉回預測的一步。
 
 > 人不是平均分數；人是在條件下重複出現的模式。`,
         `## Why still read it
 
-Mischel does not cancel personality. He demands that we say in which situations a trait shows up. For the personality page on Mind-Note, this pulls the Big Five back from labels toward prediction.
+Mischel does not cancel personality. He demands that we say in which situations a trait shows up. For the personality page on Yanis Cheng Note, this pulls the Big Five back from labels toward prediction.
 
 > A person is not an average score; a person is a pattern that repeats under conditions.`,
       ),
@@ -755,8 +755,8 @@ When clinical reading collapses into disorder names, I come back here to remembe
         en: "Clinical books read too fast become a collection. I allow myself one mechanism a week, written onto this page.",
       },
       body: body(
-        `Mind-Note 的更新節奏應該像消化，而不是像發佈。後台存在，是為了讓我敢寫短。`,
-        `Mind-Note should update like digestion, not like publishing. Admin exists so that I dare to write short.`,
+        `Yanis Cheng Note 的更新節奏應該像消化，而不是像發佈。寫短，是為了讓自己敢繼續寫。`,
+        `Yanis Cheng Note should update like digestion, not like publishing. Writing short is how I keep going.`,
       ),
     },
     {

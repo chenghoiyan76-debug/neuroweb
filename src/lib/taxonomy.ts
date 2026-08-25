@@ -258,8 +258,8 @@ export const studySessions: SessionNode[] = [
         slug: "hk-resources",
         title: { zh: "香港精神健康資源", en: "HK Mental Health Resources" },
         summary: {
-          zh: "公開熱線、機構與求援路徑。數字會變，請以官方最新資訊為準，並可在後台更新。",
-          en: "Public hotlines, organisations, and help-seeking paths. Numbers change — verify against official sources and update in admin.",
+          zh: "公開熱線、機構與求援路徑。數字會變，請以官方最新資訊為準。",
+          en: "Public hotlines, organisations, and help-seeking paths. Numbers change — verify against official sources.",
         },
       },
     ],

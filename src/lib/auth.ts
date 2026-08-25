@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 const COOKIE = "mn_admin";
 
 export function adminKey() {
-  return process.env.ADMIN_KEY || (process.env.NODE_ENV === "production" ? "" : "MindNoteStudio");
+  return process.env.ADMIN_KEY || process.env.NEXT_PUBLIC_ADMIN_KEY || "MindNoteStudio";
 }
 
 function tokenFor(key: string) {
@@ -32,7 +32,7 @@ export async function setAdminCookie() {
     httpOnly: true,
     sameSite: "lax",
     path: "/",
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production" && process.env.GITHUB_PAGES !== "true",
     maxAge: 60 * 60 * 12,
   });
 }

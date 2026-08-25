@@ -1,7 +1,9 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { LOCAL_CONTENT_KEY, readLocalContent } from "@/lib/admin-client";
 import { searchSite } from "@/lib/query";
+import { withBase } from "@/lib/site";
 import type { SiteContent } from "@/lib/types";
 
 const ContentContext = createContext<SiteContent | null>(null);
@@ -17,12 +19,31 @@ export function ContentProvider({
 
   useEffect(() => {
     let active = true;
-    fetch("/api/content", { cache: "no-store" })
-      .then((response) => response.json())
-      .then((data: SiteContent) => {
-        if (active && data?.profile) setContent(data);
+    const local = readLocalContent();
+
+    fetch(withBase("/api/content"), { cache: "no-store", signal: AbortSignal.timeout(2000) })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data: SiteContent | null) => {
+        if (!active) return;
+        if (local && (!data?.profile || local.updatedAt >= data.updatedAt)) {
+          setContent(local);
+          return;
+        }
+        if (data?.profile) {
+          setContent(data);
+          try {
+            localStorage.setItem(LOCAL_CONTENT_KEY, JSON.stringify(data));
+          } catch {
+            // ignore quota
+          }
+          return;
+        }
+        if (local) setContent(local);
       })
-      .catch(() => undefined);
+      .catch(() => {
+        if (active && local) setContent(local);
+      });
+
     return () => {
       active = false;
     };
