@@ -1,7 +1,5 @@
 import type { MetadataRoute } from "next";
 import { flattenTopics, projectAreas, projectKinds, bookGenres, studySessions } from "@/lib/taxonomy";
-import { abilityAreas } from "@/lib/sen-taxonomy";
-import { senResources } from "@/data/sen";
 import { readSiteContent } from "@/lib/repository";
 import { siteUrl } from "@/lib/site";
 
@@ -9,18 +7,7 @@ export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await readSiteContent();
-  const urls = new Set<string>([
-    "/",
-    "/about",
-    "/contact",
-    "/projects",
-    "/notes",
-    "/books",
-    "/reflection",
-    "/search",
-    "/improve",
-    "/resources",
-  ]);
+  const urls = new Set<string>(["/", "/about", "/contact", "/projects", "/notes", "/books", "/reflection", "/search"]);
 
   for (const area of projectAreas) {
     urls.add(`/projects/${area.slug}`);
@@ -48,16 +35,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   for (const item of content.reflections) {
     urls.add(`/reflection/${item.slug}`);
-  }
-  for (const area of abilityAreas) {
-    urls.add(`/improve/${area.slug}`);
-    for (const situation of area.situations) {
-      urls.add(`/improve/${area.slug}/${situation.slug}`);
-    }
-  }
-  for (const resource of senResources) {
-    urls.add(`/resources/${resource.slug}`);
-    urls.add(`/print/${resource.slug}`);
   }
 
   return [...urls].map((path) => ({ url: siteUrl(path) }));
