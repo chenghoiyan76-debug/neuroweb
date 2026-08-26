@@ -9,8 +9,8 @@ export const seedContent: SiteContent = {
     siteName: "Mind-Note",
     personName: { zh: "Yanyan Cheng", en: "Yanyan Cheng" },
     tagline: {
-      zh: "心理學、神經科學與哲學的研讀 · 專案、筆記、書評與反思",
-      en: "Study on psychology, neuroscience and philosophy · projects, notes, reviews, and reflection",
+      zh: "按實際困難搵 SEN 教材 · 心理學與教育的研讀",
+      en: "SEN materials by real difficulty · study in psychology and education",
     },
     bio: {
       zh: "我把臨床、教育與神經科學讀成可以來回走的地圖，再用專案與反思把理論照回現場。",

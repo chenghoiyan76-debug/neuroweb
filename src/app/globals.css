@@ -97,3 +97,25 @@ body {
   font-size: 1.12rem;
   line-height: 1.7;
 }
+
+@media print {
+  header,
+  footer,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  main {
+    display: block;
+  }
+
+  .worksheet-print,
+  .worksheet-print section {
+    break-inside: avoid;
+  }
+}

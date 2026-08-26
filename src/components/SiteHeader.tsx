@@ -7,9 +7,10 @@ import { useContent } from "@/components/ContentProvider";
 import { useLocale } from "@/components/LocaleProvider";
 import { pick, ui } from "@/lib/i18n";
 import { sessionsWithCustom } from "@/lib/query";
+import { abilityAreas, problemCards } from "@/lib/sen-taxonomy";
 import { bookGenres, projectAreas, projectKinds } from "@/lib/taxonomy";
 
-type MenuId = "projects" | "notes" | "books" | "reflection" | "about" | null;
+type MenuId = "materials" | "projects" | "notes" | "books" | "reflection" | "about" | null;
 
 export function SiteHeader() {
   const locale = useLocale();
@@ -80,6 +81,7 @@ function DesktopNav({ className }: { className?: string }) {
   }
 
   const items: { id: MenuId; href: string; label: string }[] = [
+    { id: "materials", href: "/improve", label: t.materials },
     { id: "projects", href: "/projects", label: t.projects },
     { id: "notes", href: "/notes", label: t.notes },
     { id: "books", href: "/books", label: t.books },
@@ -123,6 +125,13 @@ function DesktopNav({ className }: { className?: string }) {
 }
 
 function Mega({ open, alignEnd, id }: { open: boolean; alignEnd: boolean; id: MenuId }) {
+  if (id === "materials") {
+    return (
+      <Panel open={open} alignEnd={alignEnd} wide>
+        <MaterialsMenu />
+      </Panel>
+    );
+  }
   if (id === "about") {
     return (
       <Panel open={open} alignEnd={alignEnd}>
@@ -188,6 +197,41 @@ function Panel({
     <div className={`absolute top-full z-50 pt-2 ${alignEnd ? "right-0" : "left-0"}`}>
       <div className="w-72 max-w-[calc(100vw-2rem)] rounded-2xl border border-rule bg-paper-2 p-4 shadow-xl">
         {children}
+      </div>
+    </div>
+  );
+}
+
+function MaterialsMenu() {
+  const locale = useLocale();
+  const t = ui[locale];
+  return (
+    <div>
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <p className="text-[11px] tracking-[0.22em] uppercase text-teal">{t.todayQuestion}</p>
+        <Link href="/resources" className="text-xs text-teal hover:underline">
+          {t.allMaterials}
+        </Link>
+      </div>
+      <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+        {abilityAreas.map((area) => (
+          <Link key={area.slug} href={`/improve/${area.slug}`} className="rounded-lg px-2 py-1.5 hover:bg-paper">
+            <span className="mr-1">{area.emoji}</span>
+            {pick(area.short, locale)}
+          </Link>
+        ))}
+      </div>
+      <p className="mt-4 text-[11px] tracking-[0.22em] uppercase text-ink-soft">{locale === "en" ? "Common difficulties" : "常見困難"}</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {problemCards.slice(0, 8).map((problem) => (
+          <Link
+            key={problem.slug}
+            href={`/improve/${problem.area}/${problem.situation}`}
+            className="rounded-full border border-rule px-2.5 py-1 text-[12px] hover:border-gold"
+          >
+            {problem.emoji} {pick(problem.label, locale)}
+          </Link>
+        ))}
       </div>
     </div>
   );
@@ -338,6 +382,21 @@ function MobileNav({ onClose }: { onClose: () => void }) {
   return (
     <div className="max-h-[80vh] overflow-auto border-t border-rule bg-paper-2 px-4 py-3 lg:hidden">
       <div className="grid gap-4 text-sm">
+        <div>
+          <Link href="/improve" onClick={onClose} className="font-medium">
+            {t.materials}
+          </Link>
+          <div className="mt-1 ml-2 grid gap-1 text-ink-soft">
+            {abilityAreas.map((area) => (
+              <Link key={area.slug} href={`/improve/${area.slug}`} onClick={onClose}>
+                {area.emoji} {pick(area.short, locale)}
+              </Link>
+            ))}
+            <Link href="/resources" onClick={onClose}>
+              {t.allMaterials}
+            </Link>
+          </div>
+        </div>
         <div>
           <Link href="/projects" onClick={onClose} className="font-medium">
             {t.projects}

@@ -1,4 +1,5 @@
 import { bookGenres, findTopic, flattenTopics, projectAreas, studySessions } from "@/lib/taxonomy";
+import { senResources } from "@/data/sen";
 import type {
   BookGenreSlug,
   BookReview,
@@ -125,7 +126,7 @@ export function allTopicRows(content: SiteContent) {
 }
 
 export type SearchHit = {
-  kind: "note" | "book" | "project" | "reflection";
+  kind: "resource" | "note" | "book" | "project" | "reflection";
   href: string;
   title: string;
   summary: string;
@@ -139,6 +140,30 @@ export function searchSite(content: SiteContent, query: string): SearchHit[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   const hits: SearchHit[] = [];
+
+  for (const resource of senResources) {
+    if (
+      hay([
+        resource.title.zh,
+        resource.title.en,
+        resource.summary.zh,
+        resource.summary.en,
+        resource.howToUse.zh,
+        resource.howToUse.en,
+        resource.area,
+        ...resource.situations,
+        ...resource.challenges,
+        ...resource.senTags,
+      ]).includes(q)
+    ) {
+      hits.push({
+        kind: "resource",
+        href: `/resources/${resource.slug}`,
+        title: resource.title.zh,
+        summary: resource.summary.zh,
+      });
+    }
+  }
 
   for (const note of content.notes) {
     if (
