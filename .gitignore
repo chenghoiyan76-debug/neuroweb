@@ -1,5 +1,10 @@
 # dependencies
 /node_modules
+/senus/node_modules
+/.next/
+/senus/.next/
+/out/
+/senus/out/
 /.pnp
 .pnp.*
 .yarn/*

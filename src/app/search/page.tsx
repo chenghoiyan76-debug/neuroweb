@@ -13,7 +13,6 @@ export default function SearchPage() {
   const hits = useSearch(query);
   const grouped = useMemo(() => {
     return {
-      resource: hits.filter((hit) => hit.kind === "resource"),
       note: hits.filter((hit) => hit.kind === "note"),
       book: hits.filter((hit) => hit.kind === "book"),
       project: hits.filter((hit) => hit.kind === "project"),
@@ -32,19 +31,17 @@ export default function SearchPage() {
       />
       <div className="mt-8 grid gap-8">
         {query && hits.length === 0 ? <p className="text-sm text-ink-soft">{t.noResults}</p> : null}
-        {(["resource", "note", "book", "project", "reflection"] as const).map((kind) =>
+        {(["note", "book", "project", "reflection"] as const).map((kind) =>
           grouped[kind].length ? (
             <section key={kind}>
               <h2 className="font-serif text-xl">
-                {kind === "resource"
-                  ? t.materials
-                  : kind === "note"
-                    ? t.notes
-                    : kind === "book"
-                      ? t.books
-                      : kind === "project"
-                        ? t.projects
-                        : t.reflection}
+                {kind === "note"
+                  ? t.notes
+                  : kind === "book"
+                    ? t.books
+                    : kind === "project"
+                      ? t.projects
+                      : t.reflection}
               </h2>
               <div className="mt-3 grid gap-3">
                 {grouped[kind].map((hit) => (

@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: Deploy Sencus to GitHub Pages
 
 on:
   push:
@@ -22,15 +22,19 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - name: Remove API routes for static export
-        run: rm -rf src/app/api
-      - run: npm run build
+          cache-dependency-path: senus/package-lock.json
+      - name: Install Sencus
+        working-directory: senus
+        run: npm ci
+      - name: Build Sencus
+        working-directory: senus
+        run: npm run build
         env:
           GITHUB_PAGES: "true"
-          NEXT_PUBLIC_BASE_PATH: /neuroweb
+          NEXT_PUBLIC_SITE_ORIGIN: https://sencus.com
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out
+          folder: senus/out
           branch: gh-pages
           clean: true
+          cname: sencus.com

@@ -1,13 +1,11 @@
 {
-  "name": "mind-note",
+  "name": "senus",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --hostname 0.0.0.0",
-    "dev:senus": "npm --prefix senus run dev",
-    "build": "next build",
-    "build:senus": "npm --prefix senus run build",
-    "start": "next start",
+    "dev": "next dev --port 3001 --hostname 0.0.0.0",
+    "build": "next build && cp public/CNAME out/CNAME",
+    "start": "next start --port 3001 --hostname 0.0.0.0",
     "lint": "eslint"
   },
   "dependencies": {
