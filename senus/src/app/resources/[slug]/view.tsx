@@ -8,6 +8,7 @@ import { WorksheetView } from "@/components/sen/WorksheetView";
 import { Breadcrumbs } from "@/components/Ui";
 import { pick, ui } from "@/lib/i18n";
 import { printHref, relatedResources, resourceBySlug } from "@/lib/sen-catalog";
+import { DownloadPdfLink } from "@/components/sen/DownloadPdfLink";
 import {
   ageBands,
   challengeTags,
@@ -45,11 +46,18 @@ export function ResourceDetailView({ slug }: { slug: string }) {
         <h1 className="mt-2 font-serif text-4xl leading-tight">{pick(resource.title, locale)}</h1>
         <p className="mt-4 text-lg leading-relaxed text-ink-soft">{pick(resource.summary, locale)}</p>
         <div className="mt-6 flex flex-wrap gap-2">
-          <Link
-            href={printHref(resource.slug)}
+          <DownloadPdfLink
+            resource={resource}
+            locale={locale}
             className="rounded-full bg-night px-4 py-2 text-sm text-paper-2 hover:bg-indigo"
           >
-            {t.printDownload}
+            {t.downloadPdf}
+          </DownloadPdfLink>
+          <Link
+            href={printHref(resource.slug)}
+            className="rounded-full border border-rule px-4 py-2 text-sm hover:border-gold"
+          >
+            {t.openPrint}
           </Link>
           <Link href="/resources" className="rounded-full border border-rule px-4 py-2 text-sm hover:border-gold">
             {t.allMaterials}
@@ -80,9 +88,9 @@ export function ResourceDetailView({ slug }: { slug: string }) {
       <section className="mt-10">
         <div className="flex items-baseline justify-between">
           <h2 className="font-serif text-2xl">{t.worksheet}</h2>
-          <Link href={printHref(resource.slug)} className="text-sm text-teal hover:underline">
-            {t.openPrint}
-          </Link>
+          <DownloadPdfLink resource={resource} locale={locale} className="text-sm text-teal hover:underline">
+            {t.downloadPdf}
+          </DownloadPdfLink>
         </div>
         <div className="mt-4 rounded-2xl border border-rule bg-white p-5">
           <WorksheetView blocks={resource.worksheet} locale={locale} />
