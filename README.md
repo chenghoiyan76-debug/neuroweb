@@ -2,7 +2,7 @@
 
 Yanyan Cheng 的網站：SEN 學生教材庫（按實際困難而非診斷分類），以及心理學、神經科學與哲學的研讀筆記。
 
-公開網站（GitHub Pages）：https://chenghoiyan76-debug.github.io/neuroweb/
+公開網站：[https://senus.com](https://senus.com)（GitHub Pages 自訂網域）
 
 ## 教材庫怎麼用
 
@@ -27,6 +27,27 @@ npm run dev
 開啟 http://localhost:3000
 
 合併到 `main` 後，GitHub Actions 會自動更新公開網址。後台編輯內容若要出現在公開網站，需把 `data/site-content.json` 一併提交。
+
+## 網域 senus.com
+
+程式已設定為用 `senus.com` 發佈（不再用 `/neuroweb` 路徑）。你還需要在網域註冊商加入 DNS，指向 GitHub Pages：
+
+**A 紀錄（主域名 `senus.com`）**
+
+| 類型 | 主機 | 值 |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+
+**可選：www**
+
+| 類型 | 主機 | 值 |
+| --- | --- | --- |
+| CNAME | `www` | `chenghoiyan76-debug.github.io` |
+
+DNS 生效後，到 GitHub 倉庫 **Settings → Pages** 確認 Custom domain 是 `senus.com`，並勾選 Enforce HTTPS。舊網址 `https://chenghoiyan76-debug.github.io/neuroweb/` 之後可能無法正確載入資源。
 
 ## 頁面結構
 

@@ -28,9 +28,10 @@ jobs:
       - run: npm run build
         env:
           GITHUB_PAGES: "true"
-          NEXT_PUBLIC_BASE_PATH: /neuroweb
+          NEXT_PUBLIC_SITE_ORIGIN: https://senus.com
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: out
           branch: gh-pages
           clean: true
+          cname: senus.com
