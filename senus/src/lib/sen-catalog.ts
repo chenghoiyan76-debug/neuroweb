@@ -95,3 +95,7 @@ export function situationHref(area: string, situation: string) {
 export function printHref(slug: string) {
   return `/print/${slug}`;
 }
+
+export function pdfHref(slug: string, locale: "zh" | "en") {
+  return `/worksheets/${slug}-${locale}.pdf`;
+}

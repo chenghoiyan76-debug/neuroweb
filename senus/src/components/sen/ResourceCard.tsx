@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { DownloadPdfLink } from "@/components/sen/DownloadPdfLink";
 import { pick, type Locale } from "@/lib/i18n";
-import { printHref, resourceHref } from "@/lib/sen-catalog";
+import { resourceHref } from "@/lib/sen-catalog";
 import {
   ageBands,
   challengeTags,
@@ -63,9 +64,13 @@ export function ResourceCard({
         >
           {locale === "en" ? "Open" : "打開教材"}
         </Link>
-        <Link href={printHref(resource.slug)} className="rounded-full border border-rule px-3 py-1.5 text-[12px] hover:border-gold">
-          {locale === "en" ? "Print / PDF" : "列印／下載"}
-        </Link>
+        <DownloadPdfLink
+          resource={resource}
+          locale={locale}
+          className="rounded-full border border-rule px-3 py-1.5 text-[12px] hover:border-gold"
+        >
+          {locale === "en" ? "Download PDF" : "下載 PDF"}
+        </DownloadPdfLink>
       </div>
     </article>
   );

@@ -21,3 +21,12 @@ npm run dev
 ```
 
 開啟 http://localhost:3001（Cursor 雲端預覽請開 **3001** 埠）。
+
+## 下載 PDF
+
+每份教材都有「下載 PDF」。建置時會自動產生工作紙檔。
+
+若要用你自己設計的 PDF，把檔案放到 `public/worksheets/designed/`，檔名例如：
+
+`five-minute-start-card-zh.pdf`  
+`five-minute-start-card-en.pdf`
