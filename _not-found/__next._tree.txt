@@ -1,4 +1,4 @@
-:HL["/neuroweb/_next/static/chunks/2y5dt3gy5i_zh.css","style"]
-:HL["/neuroweb/_next/static/chunks/2mjo94k61zq3w.css","style"]
-:HL["/neuroweb/_next/static/chunks/1lrpb82l_ng9j.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4160,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"CPYJENxMgMdr4vziuigY8"}
+:HL["/_next/static/chunks/2y5dt3gy5i_zh.css","style"]
+:HL["/_next/static/chunks/2mjo94k61zq3w.css","style"]
+:HL["/_next/static/chunks/1_2dljqcgelb4.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"ZRXEZQQifY8im_yNncXc-"}
