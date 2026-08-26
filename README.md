@@ -4,7 +4,7 @@ Yanyan Cheng 的個人網站：專案、讀書筆記、書評與自我反思。
 
 心理學、神經科學與哲學的研讀。繁中版於術語後括注英文，例如：執行功能 (Executive Function)。亦可切換完整英文版。
 
-SEN 教材庫是另一個獨立網站 **[Senus](https://senus.com)**（原始碼在 `/senus`），唔會同 Mind-Note 混成同一個站。
+SEN 教材庫是另一個獨立網站 **Senus**（原始碼在 `/senus`），唔會同 Mind-Note 混成同一個站。
 
 ## 本機
 
@@ -30,9 +30,9 @@ npm run dev
 
 或在根目錄執行 `npm run dev:senus`。
 
-合併到 `main` 後，GitHub Pages 會發佈 **Senus** 到 [https://senus.com](https://senus.com)。Mind-Note 繼續用本機 `npm run dev` 預覽。
+公開網站目前仍是 Mind-Note（GitHub Pages / yanischeng.com）。Senus 請用本機 `npm run dev:senus` 或 Cursor 預覽 **3001** 埠開啟。
 
-若要把 `senus.com` 指到 GitHub Pages，請在網域註冊商加入 A 紀錄：`185.199.108.153`、`185.199.109.153`、`185.199.110.153`、`185.199.111.153`。
+`senus.com` 而家已經有另一個 WordPress 網站，唔好把 GitHub Pages 指過去，否則會蓋掉現有內容。若你真正擁有一個空閒網域，再另行接上 Senus。
 
 ## 頁面結構
 

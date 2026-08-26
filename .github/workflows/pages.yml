@@ -1,4 +1,4 @@
-name: Deploy Senus to GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
@@ -22,19 +22,15 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: senus/package-lock.json
-      - name: Install Senus
-        working-directory: senus
-        run: npm ci
-      - name: Build Senus
-        working-directory: senus
-        run: npm run build
+      - run: npm ci
+      - name: Remove API routes for static export
+        run: rm -rf src/app/api
+      - run: npm run build
         env:
           GITHUB_PAGES: "true"
-          NEXT_PUBLIC_SITE_ORIGIN: https://senus.com
+          NEXT_PUBLIC_BASE_PATH: /neuroweb
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: senus/out
+          folder: out
           branch: gh-pages
           clean: true
-          cname: senus.com

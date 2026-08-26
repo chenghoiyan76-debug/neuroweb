@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
   output: isStaticExport ? "export" : undefined,
   trailingSlash: isGitHubPages,
   images: { unoptimized: true },
+  // Cursor Cloud preview proxies through *.agent.cvm.dev
+  allowedDevOrigins: ["*.agent.cvm.dev"],
   turbopack: {
     root: dir,
   },
