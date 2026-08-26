@@ -12,7 +12,7 @@ export function pick(text: { zh: string; en: string }, locale: Locale) {
 
 export const ui = {
   zh: {
-    brand: "Senus",
+    brand: "Sencus",
     brandSub: "按實際困難搵 SEN 教材",
     search: "搜尋",
     menu: "選單",
@@ -74,12 +74,12 @@ export const ui = {
     notFoundTitle: "找不到這一頁",
     notFoundBody: "路徑可能尚未建立，或內容已被移動。",
     notFoundHome: "回到首頁",
-    aboutTitle: "關於 Senus",
+    aboutTitle: "關於 Sencus",
     aboutBody:
-      "Senus 是獨立的 SEN 學生教材庫：按實際困難搵介入工具，而不是按診斷標籤瀏覽。這不是 Mind-Note 個人筆記站，也不是診所或評估服務。",
+      "Sencus 是獨立的 SEN 學生教材庫：按實際困難搵介入工具，而不是按診斷標籤瀏覽。這不是 Mind-Note 個人筆記站，也不是診所或評估服務。",
   },
   en: {
-    brand: "Senus",
+    brand: "Sencus",
     brandSub: "SEN materials by real difficulty",
     search: "Search",
     menu: "Menu",
@@ -141,8 +141,8 @@ export const ui = {
     notFoundTitle: "Page not found",
     notFoundBody: "This path may not exist yet, or the content has moved.",
     notFoundHome: "Back home",
-    aboutTitle: "About Senus",
+    aboutTitle: "About Sencus",
     aboutBody:
-      "Senus is a standalone SEN materials library: find intervention tools by real difficulty, not by diagnostic label. It is not the Mind-Note personal study site, and not a clinic or assessment service.",
+      "Sencus is a standalone SEN materials library: find intervention tools by real difficulty, not by diagnostic label. It is not the Mind-Note personal study site, and not a clinic or assessment service.",
   },
 } as const;

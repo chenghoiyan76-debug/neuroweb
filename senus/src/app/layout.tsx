@@ -5,6 +5,7 @@ import { LocaleProvider } from "@/components/LocaleProvider";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { defaultLocale, ui } from "@/lib/i18n";
+import { siteOrigin } from "@/lib/site";
 import "./globals.css";
 
 const notoSans = Noto_Sans_TC({
@@ -20,6 +21,7 @@ const notoSerif = Noto_Serif_TC({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteOrigin),
   title: {
     default: `${ui.zh.brand}: ${ui.zh.brandSub}`,
     template: `%s · ${ui.zh.brand}`,

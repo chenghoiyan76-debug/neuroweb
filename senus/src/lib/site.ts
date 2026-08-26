@@ -1,4 +1,4 @@
-export const siteOrigin = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://senus.com";
+export const siteOrigin = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://sencus.com";
 export const basePath = "";
 
 export function withBase(href: string) {
